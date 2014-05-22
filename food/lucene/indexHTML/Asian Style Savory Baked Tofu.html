@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Asian Style Savory Baked Tofu </h3><span>Lunch/snacks,Soy/tofu,Beans,Chinese,Asian,Very low carbs,Vegan,Low cholesterol,Healthy 2,Low in...,Savory,Taste/mood,Oven,Time to make,Equipment</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://img.food.com/img/recipes/81/28/4/large/pic3ZHvfi.jpg" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>firm tofu</li><li>dark sesame oil</li><li>tamari soy sauce</li><li>garlic clove, minced</li><li>finely minced onions</li><li>grated fresh gingerroot</li><li>water</li><li>hot chili paste, to taste (optional)</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>For best results, tofu should be "pressed" in order to remove excess liquid and absorb the flavors of the marinade.</li><li>Press tofu block between two plates, weighted down with a cast iron pan, large bowl of water, or heavy cans, for about 30 minutes.</li><li>Halfway through, you may dump the plate of water and flip the tofu block.</li><li>To make marinade, simply whisk together the ingredients in a bowl.</li><li>After tofu is pressed, cut the block into small cubes or triangles.</li><li>Place pieces of tofu into baking dish, and cover with the marinade.</li><li>The tofu can sit overnight in the marinade, or can be prepared right away.</li><li>Preheat oven to 375 degrees.</li><li>Bake tofu about 35-45 minutes, or until all the liquid is absorbed.</li><li>Tofu can be eaten by itself, or added to stir-frys, salads, soups or sandwiches.</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> World's Best Cinnamon Raisin Bread (Not Bread Machine) </h3><span>Yeast breads,Breads,Breakfast,Grains,Pasta, rice and grains,Toddler Friendly,Healthy,Kid Friendly,Low in...,Winter,Seasonal,Brunch,Taste/mood,For large groups,Oven,Time to make,Equipment,Number of servings</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://img.food.com/img/recipes/98/86/7/large/pic7ooG0e.jpg" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>milk</li><li>warm water (must be between 110-115 degrees)</li><li>active dry yeast</li><li>eggs</li><li>white sugar</li><li>salt</li><li>unsalted butter, softened</li><li>raisins</li><li>all-purpose flour</li><li>milk</li><li>white sugar</li><li>ground cinnamon</li><li>butter, melted (approx.)</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>Warm the milk in a small sauce pan on the stove until it just starts to bubble, stirring occasionally.</li><li>Remove from heat.</li><li>Let cool until lukewarm, about 120-125 degrees.</li><li>Dissolve yeast in warm water and set aside until yeast is frothy, about 10 minutes or so (make sure your water is at the correct temperature or the yeast won't activate.) Then mix in eggs, sugar, butter salt and raisins (stir in the cooled milk slowly so you don't cook the eggs.) Add the flour gradually to make a stiff dough.</li><li>Knead the dough on a lightly floured surface for a few minutes until smooth.</li><li>Place in a large, buttered, mixing bowl and turn to grease the surface of the dough.</li><li>Cover with a warm, damp cloth and let rise (I like to let my bread rise in the oven with the light on. It has just the right amount of heat and keeps the bread out of drafts.) Allow to rise until doubled, usually about 1 1/2 hours.</li><li>Roll out on a lightly floured surface into a large rectangle 1/2 inch thick.</li><li>Moisten the dough with 2 tablespoons milk and rub all over the dough with your hands.</li><li>Mix together 1 cup of sugar and 3 tablespoons cinnamon and sprinkle mixture evenly on top of the moistened dough.</li><li>Roll up tightly (the long way).</li><li>The roll should be about 3 inches in diameter.</li><li>Cut into thirds, and tuck under ends and pinch bottom together.</li><li>Place loaves into well greased (you can use Crisco or butter for this) 9 x 5 inch pans and lightly grease tops of loaves.</li><li>Let rise in warm place, uncovered, again for about an hour.</li><li>Bake at 350 degrees for 45 minutes or until loaves are lightly browned and sound hollow when tapped.</li><li>Remove from oven and let cool on rack.</li><li>Take melted butter and spread over tops of loaves.</li><li>After about 20 minutes, lay loaves on their sides and remove from pans.</li><li>Allow to cool before slicing.</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

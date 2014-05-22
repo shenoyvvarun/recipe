@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Best Baby Back Ribs in Town </h3><span>Sauces,Condiments, etc.,Pork,Meat,North american,Weeknight,Taste/mood,Oven,Beginner cook,Stove top,Served hot,Time to make,Easy,Equipment,Presentation</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://img.food.com/img/recipes/57/18/5/large/piciZmoEj.jpg" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>baby back ribs (pork)</li><li>molasses</li><li>ketchup</li><li>vinegar</li><li>brown sugar</li><li>liquid smoke</li><li>onion powder</li><li>chili powder</li><li>dry mustard</li><li>cornstarch</li><li>water</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>Make one recipe of Rib Sauce (above) and set aside.</li><li>Pre-cook ribs by EITHER  Baking (preferred method) OR Parboiling.</li><li>MAKE-AHEAD TIP:  After pre-cooking (baking or parboiling) ribs, they may be vacuum sealed and frozen for up to 3 months OR glazed with Rib Sauce and refrigerated or given their final baking immediately.</li><li>**   BAKING RIBS (preferred method):  Cut rack of ribs in half. Place 1 1/2 pounds ribs in each of two 9x13-inch casserole dishes.</li><li>Add 1/4 cup vinegar to each casserole.  Cover with foil and bake at 350 degrees for 50 minutes.  Drain all liquid.</li><li>**  PAR-BOILING RIBS:  Cut rack of ribs in half.  Fill large pot with water; heat to boiling.  Add all ribs to boiling water (should be enough to just cover top of ribs).</li><li>Simmer ribs about 45 minutes until just tender but meat is not falling off the bones.  Remove ribs from boiling water.  Rinse and drain.</li><li>**** RIBS (Final Baking): Cut ribs in sections.  In two  9x13-inch glass casserole, place ribs in SINGLE layer in casserole.</li><li>Pour about 1/3 of Rib Sauce over one dish of ribs to glaze them.</li><li>Repeat with second half of ribs, using another 1/3 of sauce or enough of the remaining sauce to glaze all the ribs.</li><li>MAKE-AHEAD TIP: At this point you can cover them with plastic wrap and refrigerate for up to 48 hours.</li><li>If frozen, thaw before baking.</li><li>Place UNCOVERED ribs in preheated 350 degree oven.</li><li>Bake for 45-60 minutes until most of sauce has been absorbed by the ribs and meat is "melt-in-your-mouth" tender.</li><li>If you have any remaining sauce, serve it with the ribs, along with plenty of napkins.</li><li>These are finger-licking good and messy to eat-- but is there any other way to eat ribs?.</li><li>*** RIB SAUCE: Mix cornstarch and water together to make a slurry Set aside.</li><li>Mix remaining dry ingredients together.</li><li>Place in saucepan.</li><li>Mix remaining wet ingredients together.</li><li>Pour half of wet ingredients into dry ingredients, stirring to mix well.</li><li>Add remaining half of wet ingredients, stir to mix well, and simmer mixture, uncovered, for about 10-20 minutes to thicken sauce a bit.</li><li>While mixture is gently boiling, pour in slurry while stirring.</li><li>Return mixture to a slow boil and cook until sauce thickens a little.</li><li>Sauce should be thick enough to cling to ribs, yet pourable.</li><li>Cool sauce and store in air-tight glass or plastic container.</li><li>Refrigerated it keeps indefinitely.</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

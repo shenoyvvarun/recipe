@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Perfect Pork Tenderloin </h3><span>Pork loins,Pork,Meat,Very low carbs,High protein,Healthy,High in...,Low in...,Potluck,To go...,5 ingredients or less,Oven,Beginner cook,Time to make,Easy,Equipment</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://pictures.food.com/api/file/Rm025hLERcexHST9SPhQ-pork-loin-1.jpg/convert?loc=/pictures.food.com/recipes/63/82/8/VNBMPbITm2nkXfmGvbDt_pork%20loin%201.jpg&width=266" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>boneless pork tenderloin, AT ROOM TEMPERATURE (approximate)</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>NOTE:  The success of this cooking method will depend upon how accurate the temperature of your oven is and how well your oven retains heat.  Adjust cooking time +/- according to your individual oven.</li><li>NOTICE: If you have a very old oven that is not well insulated, this recipe may not work for you, as heat retention/residual heat is important to the success of this recipe.</li><li>Determine the EXACT weight of roast from the meat wrapper.  Weight will determine how long to cook the roast.</li><li>Preheat oven to 500 degrees.  Remove tenderloin from refrigerator.  Season meat as desired.  Place seasoned meat in an uncovered roasting pan on a shelf in the bottom 1/3 of your oven.</li><li>Bake EXACTLY 5 1/2 minutes PER POUND.  Adjust +/- according to your oven's accuracy and heat retention. NOTE:</li><li>IF YOU HAVE AN OVEN PROBE OR THERMOMETER THAT HAS A WIRE THAT GOES THROUGH THE SIDE OF THE OVEN DOOR, BY ALL MEANS USE IT AND SET THE TEMPERATURE ALARM FOR 140 DEGREES.  REMOVE MEAT FROM OVEN WHEN ALARM ALERT GOES OFF (probably before an hour has expired).</li><li>After resting 5-10 minutes, the roast should reach a safe 145-150 degrees.</li><li>Turn oven OFF and DO NOT open oven door for 45 to 1 hour.  Remove pork from oven, lightly cover with foil, and let rest 5-10 minutes to redistribute internal juices.  Roast should be done, very slightly pink in the center, and very moist.</li><li>NOTE:******* For anyone questioning this method of cooking, it really does reach the proper internal temperature on a thermometer.  According to Sara Moulton on FoodTV, botulism is killed at 138 degrees, and 145 is a safe temperature for pork, although the USDA recommends 160 degrees (meat will be much drier).  If the center of the meat is not a little pink, it is overcooked!</li><li>VARIATION:  To make Roasted Veggies along with the tenderloin, peel carrots and potatoes, and cut into about 1-inch cubes.   Season as desired and drizzle with a little oil.  Add vegetables to pan around (but NOT touching) pork tenderloin.  Cook tenderloin as instructed above.  The roasted potatoes and carrots should be done when the roast is done.  You may need to adjust the size of the potatoes and carrots depending upon the weight of your tenderloin and how long you cook it.</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

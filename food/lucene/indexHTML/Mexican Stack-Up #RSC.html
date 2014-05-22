@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Mexican Stack-Up #RSC </h3><span>Black beans,Corn,Beans,Vegetable,Meat,Mexican,Low in...,Served hot,Reynolds wrap contest,Time to make,Equipment,Presentation,From scratch</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://img.food.com/img/recipes/48/62/61/large/picwAIwWP.jpg" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>poblano pepper</li><li>olive oil</li><li>green onions, sliced thinly</li><li>garlic cloves, finely chopped</li><li>ground beef</li><li>taco seasoning mix, to your taste</li><li>cayenne pepper</li><li>canned black beans, drained</li><li>corn kernel, fresh</li><li>cream cheese, room temperature</li><li>chicken stock</li><li>chives</li><li>fresh cilantro, chopped</li><li>corn tortillas</li><li>sharp cheddar cheese, grated</li><li>monterey jack cheese, grated</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>Preheat broiler to high broil.  Set the rack 6 inches from the heating element.  Place the poblano pepper on a baking sheet and broil for 4 minutes on each side, or until the skin is blistered and rising up.Watch closely so you don't scorch your pepper. Remove from the oven and place the poblano pepper on a sheet of Reynold's Wrap aluminum foil and wrap loosely to allow the pepper to steam for 10 minutes.</li><li>Turn the broiler off and preheat the oven to 350 degrees.  Add olive oil to a large skillet and heat over medium heat.  Add the green onions and cook for 1 minute, then add the garlic and cook for 1 minute.  Add the ground beef and cook until no longer pink. Drain all grease from the pan, using a paper towel to soak up any extra grease.</li><li>While the onions and meat are cooking, remove the poblano from the Reynold's Wrap aluminum foil and let cool a bit.  Peel the skin from the poblano and dice.</li><li>Add the chicken stock, taco seasoning, cayenne pepper, diced poblano peppers, black beans, corn, cilantro, cream cheese and chives to the skillet.  Cook while stirring until it is creamy.  Taste and add salt and pepper as you feel is needed. Remove from heat.</li><li>Choose a casserole dish that is at least 2 1/2 inches to 3 inches deep and can hold 2 stacks of 5 inch corn tortillas.  Otherwise, you can make two separate casserole dishes.  Spray with oil and place 2 corn tortillas (making 2 stacks!) in the casserole dish. Spread 1/4th of the meat mixture on top of the two tortillas.  Top with 1/4 of the cheese.  Repeat this step 3 times, ending with cheese.</li><li>Loosely tent your casserole dish with Reynolds Wrap Aluminum Foil.  Use no stick Reynolds Aluminum Foil if you are afraid your cheese will attach to the aluminum foil.  Bake at 350 degrees for 20 minutes. Remove the Reynolds Wrap Aluminum Foil and bake for an additional 15 to 20 minutes.  Let the dish sit for 5 minutes before slicing and serving.  Enjoy!</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

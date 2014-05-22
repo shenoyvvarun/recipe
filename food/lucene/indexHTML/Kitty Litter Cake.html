@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Kitty Litter Cake </h3><span>For large groups,Oven,Time to make,Equipment,Number of servings</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://img.food.com/img/recipes/30/91/large/picwvPHDM.jpg" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>eggs (or as called for by your cake mix)</li><li>oil (or as called for by your cake mix)</li><li>water (or as called for by your cake mix)</li><li>white cake mix</li><li>eggs (or as called for by your cake mix)</li><li>oil (or as called for by your cake mix)</li><li>water (or as called for by your cake mix)</li><li>vanilla instant pudding mix</li><li>vanilla sandwich cookies</li><li>Tootsie Rolls</li><li>new kitty litter box</li><li>new kitty litter box</li><li>Pooper Scooper</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>Prepare cake mixes and bake according to box directions (any size pan). Prepare  pudding, chill until ready to assemble. Crumble sandwich cookies in small  batches in food processor, scraping often.</li><li>Set aside all but 1/4 cup.</li><li>To the  1/4 cup of crumbs, add a few drops of green food coloring and mix using fork or  shake in a jar.</li><li>When cakes are cooled to room temp, crumble into a large bowl.</li><li>Toss with half the remaining cookie crumbs and chilled pudding.</li><li>You probably  won't need all the pudding, mix the cake and "feel" it, you don't want it soggy,  just moist; ge  ntly combine. Line litter box.</li><li>Put mixture into box.</li><li>Put 3  unwrapped tootsie rolls in microwave safe dish and heat until softened.</li><li>Shape  ends so they are no longer blunt, curving slightly.</li><li>Repeat with 3 more tootsie  rolls and bury in cake mixture. Sprinkle the other half of cookie crumbs over  top.</li><li>Scatter green crumbles lightly over top (chlorophyll in cat litter). Heat  3 tootsie rolls in microwave until almost melted.</li><li>Scrape them on top of the  cake and sprinkle with cookie crumbs.</li><li>Spread remaining tootsie rolls over top;  take one and heat until pliable, hang over side of litter box, sprinkle with  cookie crumbs.</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Southern Buttermilk Biscuits </h3><span>Rolls/biscuits,Breads,North american,High calcium,High in...,Oven,Time to make,Equipment,Number of servings</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://img.food.com/img/recipes/26/11/0/large/picAS2Onn.jpg" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>unbleached all-purpose flour, plus more for dusting the board (if you can get White Lily flour, your biscuits will be even better)</li><li>baking soda</li><li>baking powder (use one without aluminum)</li><li>unsalted butter, very cold</li><li>buttermilk (approx)</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>Preheat your oven to 450°F.</li><li>Combine the dry ingredients in a bowl, or in the bowl of a food processor.</li><li>Cut the butter into chunks and cut into the flour until it resembles course meal.</li><li>If using a food processor, just pulse a few times until this consistency is achieved.</li><li>Add the buttermilk and mix JUST until combined.</li><li>If it appears on the dry side, add a bit more buttermilk. It should be very wet.</li><li>Turn the dough out onto a floured board.</li><li>Gently, gently PAT (do NOT roll with a rolling pin) the dough out until it's about 1/2" thick. Fold the dough about 5 times, gently press the dough down to a 1 inch thick.</li><li>Use a round cutter to cut into rounds.</li><li>You can gently knead the scraps together and make a few more, but they will not be anywhere near as good as the first ones.</li><li>Place the biscuits on a cookie sheet- if you like soft sides, put them touching each other.</li><li>If you like"crusty" sides, put them about 1 inch apart- these will not rise as high as the biscuits put close together.</li><li>Bake for about 10-12 minutes- the biscuits will be a beautiful light golden brown on top and bottom.</li><li>Do not overbake.</li><li>Note: The key to real biscuits is not in the ingredients, but in the handling of the dough.</li><li>The dough must be handled as little as possible or you will have tough biscuits.</li><li>I have found that a food processor produces superior biscuits, because the ingredients stay colder and there's less chance of overmixing.</li><li>You also must pat the dough out with your hands, lightly.</li><li>Rolling with a rolling pin is a guaranteed way to overstimulate the gluten, resulting in a tougher biscuit.</li><li>Note 2: You can make these biscuits, cut them, put them on cookie sheets and freeze them for up to a month.</li><li>When you want fresh biscuits, simply place them frozen on the cookie sheet and bake at 450°F for about 20 minutes.</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

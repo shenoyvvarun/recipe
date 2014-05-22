@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Kittencal's Greek Moussaka </h3><span>Meat,Greek,European,Low in...,Oven,Time to make,Equipment</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://pictures.food.com/api/file/OQPkBUBSQWbNvB0xTRr3-IMG_20140118_204031.jpg/convert?loc=/pictures.food.com/recipes/88/80/4/xdaAAfYT3KAWpwsPrYsQ_IMG_20140118_204031.jpg&width=266" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>eggplants</li><li>lean ground beef (or can use ground lamb)</li><li>onions, peeled and chopped</li><li>fresh minced garlic (or to taste, I use lots!)</li><li>tomato sauce</li><li>dried oregano (or to taste)</li><li>salt, divided (or to taste, I use seasoned salt)</li><li>fresh ground black pepper (or to taste)</li><li>butter</li><li>salt (I use seasoned salt)</li><li>fresh ground black pepper (or to taste)</li><li>flour</li><li>half-and-half cream</li><li>egg</li><li>grated parmesan cheese (can use more)</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>Grease a 9 x 9-inch baking pan although you could use a 13 x 9 pan using a smaller pan will result in a thicker casserole.</li><li>Peel the eggplants then slice 1/4-inch thick (or a little thicker won't hurt).</li><li>Brush cookie sheet with olive oil.</li><li>Coat each side of sliced eggplant with olive oil then season slices with salt and freshly ground pepper (I use seasoned salt for this and use as much pepper as desired).</li><li>Place the eggplant slices on cookie sheet; broil under the broiler until brown; turn and broil the other side, brushing with oil if needed; repeat with all eggplant slices.</li><li>In the bottom of the prepared baking dish arrange half of the eggplant slices.</li><li>In a large skillet, combine beef and onions; cook stirring until the beef is no longer pink and the onions are soft; drain fat.</li><li>Add in the garlic, tomato sauce, oregano, 1/2 tsp salt and black pepper to taste; pour mixture over eggplant slices.</li><li>Arrange the remaining eggplant slices over the beef mixture.</li><li>PREPARE THE CHEESE SAUCE: Melt the butter in a saucepan, whisk in flour, 1/2 tsp salt and pepper to taste; gradually stir in half and half or milk, cook and stir over medium heat until thick and bubbly.</li><li>In a small bowl, beat egg; stir in some of the hot sauce, then add egg to sauce mixture, mix well; add in Parmesan cheese, and stir again.</li><li>Pour the cheese sauce over mixture in baking dish.</li><li>Bake in a preheated 350 degree F oven for 45 minutes.</li><li>Cut into squares.</li><li>Note: If doubling this recipe to serve 8 it is best to make two separate casseroles instead of one larger one.</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

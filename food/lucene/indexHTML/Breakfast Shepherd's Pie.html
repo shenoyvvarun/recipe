@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Breakfast Shepherd's Pie </h3><span>Breakfast,Potato,Egg,Eggs/dairy,Vegetable,Time to make,Easy,Inexpensive</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://pictures.food.com/api/file/W7l5XP0SOG9ibNSnAkQK-131-break-shep-pie.jpg/convert?loc=/pictures.food.com/recipes/47/49/87/fPzdB7nQcOxUzd3hQmhc_131%20break%20shep%20pie.jpg&width=266" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>Simply Potatoes Diced Potatoes with Onion</li><li>bacon</li><li>eggs</li><li>red bell pepper</li><li>green onion, diced</li><li>feta</li><li>shredded cheddar cheese</li><li>salt</li><li>pepper</li><li>paprika</li><li>canned chopped jalapeno</li><li>onion powder</li><li>corn beef hash</li><li>olive oil</li><li>garlic clove</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>Cook 6 slices of bacon until crisp, drain on paper towel.</li><li>Drizzle olive oil in pan, heat up and cook small diced green onion and glove of chopped garlic.</li><li>Mix 6 eggs in a bowl.</li><li>Salt and pepper to taste.</li><li>Crumble in feta to taste.</li><li>Crumble in 6 slices bacon.</li><li>Add cooked green onion and garlic to egg mixture.</li><li>Mix up egg mixture and ingredients and pour into 8x8 casserole dish.</li><li>Pre-heat oven to 350 degrees and put egg mixture in for 20-25 minutes.</li><li>Chop up Red Pepper.</li><li>Heat up olive oil in pan.</li><li>Cook Simply Potatoes Diced Potatoes.</li><li>Add chopped red pepper.</li><li>Add jalapenos to taste (optional).</li><li>Salt and pepper to taste.</li><li>Add paprika.</li><li>Add onion powder.</li><li>Mix all up until potatoes are cooked.</li><li>Cook up 2 cans of beef hash in another pan.</li><li>Once egg mixture is done, take out of the oven and spread the cooked hash on top of eggs.</li><li>Next pour potato mixture on top of hash.</li><li>Cover the top of potatoes with shredded cheddar cheese.</li><li>Put back in oven for 5-10 minutes or until cheese is melted.</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Ramen Noodle Egg Foo Yung </h3><span>Breakfast,Lunch/snacks,Egg,Eggs/dairy,Pasta, rice and grains,Brunch,For 1 or 2,Beginner cook,Time to make,Easy,Inexpensive,Number of servings</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://img.food.com/img/recipes/13/35/13/large/picTmF5ke.jpg" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>ramen noodles (I think chicken is the best but I like oriental flavored, occasionally)</li><li>butter, divided</li><li>eggs</li><li>green onions, finely chopped</li><li>sesame oil</li><li>soy sauce</li><li>baking powder</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>Cook ramen noodles according to package instructions and drain well in a colander.</li><li>Whisk eggs, onions, 1/2 of the seasoning packet, sesame oil, soy sauce, and baking powder with a fork in a small bowl and set aside.</li><li>Heat butter on med high heat in an 8 inch nonstick skillet.</li><li>Add drained noodles to butter and brown lightly about two or three minutes. Do not stir.</li><li>Pour whisked egg mixture over noodles and gently incorporate, don't really stir, just sort of mix it gently and let the egg set enough to flip the egg patty over.</li><li>Flip the patty over and cook the other side until the egg is set, about two minutes.</li><li>Flip over again and cook about 1 minute more.</li><li>Serve with soy sauce if you wish or an egg foo yung sauce.</li><li>** if you are egg foo yung/patty flipping challenged I have two possible solutions for you.</li><li>1.Use duonyte's suggestion and flip a small patty into a larger pan. I have done that and it works very well.</li><li>2. I have also used tuna cans as a foo yung mold. Cut out the top and bottom of a large can of tuna with a can opener --  three tuna can molds will fit into a large nonstick skillet and they are the perfect size to flip. (spray the insides of the cans with cooking spray!) Then you have three smaller patties instead of one huge bulky one. The cooking time will be affected --  but when the egg is set it is done. It isn't rocket science. Thank you everyone for your interest in this humble recipe. :lol:.</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

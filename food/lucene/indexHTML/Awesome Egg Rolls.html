@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Awesome Egg Rolls </h3><span>Vegetable,Meat,Chinese,North american,Asian,Deep fried,Time to make,Presentation,Technique</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://img.food.com/img/recipes/86/74/large/picLnXVNO.jpg" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>ground beef</li><li>shredded cabbage (angel hair if you can find it)</li><li>shredded carrot</li><li>egg roll wrap</li><li>egg</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>Fry the ground beef with the salt and pepper and garlic powder until the meat is completely browned.</li><li>Make sure to add a lot of the salt and pepper and garlic powder.</li><li>This needs to have a strong flavor because you'll be frying it with other ingredients.</li><li>Don't put so much in that you can't eat it, but you want to really taste it.</li><li>Once you are done getting the flavor right, get a LARGE bowl and put the shredded cabbage and carrots in it and then add the ground beef on top.</li><li>Mix together completely and let sit for about 15 minutes.</li><li>I do that so the mixture will soften and I can roll them more easily.</li><li>Check the mixture after it sits to make sure the flavor is still there and really stands out.</li><li>If not, add more of the salt and pepper and garlic powder.</li><li>It's really up to your taste buds, but this is what I've done and I get RAVE reviews.</li><li>Heat up your oil for frying in a deep fryer.</li><li>Follow the manufacturer's instructions for how much oil to add, but always make sure you don't fill it to the top so you don't get hurt.</li><li>I usually only fill about half of the fryer.</li><li>Crack an egg into a small bowl to make a wash for sealing the egg roll wraps.</li><li>Take a wrap and put about 1-2 teaspoons of the meat mixture onto the wrap.</li><li>Wrap the roll as shown on the package, remembering to seal with the egg wash.</li><li>I try to wrap my rolls tightly, but I don't always do that so well.</li><li>Once you are done wrapping, place the egg rolls carefully into the oil about 2-3 at a time.</li><li>Cook them until they are blond in color.</li><li>Don't let them get too dark.</li><li>Take them out and let drain on paper towels.</li><li>You're done! I serve mine with Grey Poupon for dipping. yummy!</li><li>Others might enjoy soy sauce! These also freeze very well, that is of course, if you have any left! I make a bunch for myself and have them for lunch.</li><li>Just pop them in the microwave for about 1 minute, and you're done.</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

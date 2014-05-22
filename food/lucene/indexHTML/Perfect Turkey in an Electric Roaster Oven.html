@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Perfect Turkey in an Electric Roaster Oven </h3><span>Whole turkey,Poultry,Meat,Heirloom/historical,Roast,For large groups,5 ingredients or less,Oven,Time to make,Easy,Equipment,Number of servings</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://pictures.food.com/api/file/mA1rf19TwKi0l3D0QfUx-photo.JPG/convert?loc=/pictures.food.com/recipes/33/94/53/X4gPoVSBSfCucsUDW3mJ_photo.JPG&width=266" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>whole turkey, thawed up to 20 lbs</li><li>seasoning salt</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>Take the insert pan out of the roaster and pre-heat the roaster to it's highest setting (on mine it's 450, but 500 if your oven goes that high).</li><li>Prep the turkey by rinsing and patting dry. Sprinkle salt in the cavities. Stuff your turkey if desired.  Note on stuffing:  Don’t pre-stuff your turkey. Mix and stuff ingredients immediately before roasting. Stuff lightly and loose. Allow ¾ cup stuffing per pound of turkey.  (Tossing in a few pieces of cut fruit or herbs is not considered 'stuffing.'  Stuffing usually means filling up the cavity.)</li><li>Place the bird in the roasting pan on top of the wire rack that comes with your roaster.  Make sure the handles are up, not tucked below.</li><li>Rub the entire bird with olive oil or butter. (I have better luck with olive oil.)  Doctor up your bird with whatever special seasonings you wish.  I always use poultry seasoning.</li><li>Finish with a good sprinkle of seasoning salt and black pepper.  The olive oil and seasoning salt will help the skin brown nicely.  I also like to use those little disposable "plug in" turkey thermometers. Put the insert pan with the bird into the roaster oven and cover. I never add water or other liquid to the pan, but some people do.</li><li>Roast at highest setting for 30 minutes.  The oil, seasoning salt and the searing time will make the skin beautifully browned and perfect!</li><li>After 30 minutes, turn the oven temperature down to 325.</li><li>The bird will self-baste if you do not lift the lid, so you don't have to baste it every 20 minutes like you do in your conventional oven. DO NOT LIFT LID during cooking time!  Lifting the lid will increase cooking time because roaster ovens lose their heat unlike regular ovens.   I've read that roaster ovens effectively 'steam' the turkey making the meat come out  --  well, steamed.  This is not true as you will find out.  Similar to the roasted chickens you can get at your supermarket, the bird will come out moist and perfectly roasted.  Why do you think they call it a Roaster Oven?.</li><li>Check your Bird - Figure your total cooking time from the time you first put the bird in the roaster.  FINAL TEMPERATURE FOR SAFETY AND DONENESS IS: 180 DEGREES IN THIGH AND 165 DEGREES IN BREAST AND STUFFING. Juices should be clear, not pink.</li><li>Your turkey will almost certainly be done at the earliest of the suggested times on the chart. Lift lid only slightly and quickly to check the pop-up thermometer or use your meat thermometer. If necessary, check after another 30 minutes, but I doubt you'll have to do that.  If the pop-up thermometer isn't popped, double check with your regular meat thermometer because those little plastic things stick sometimes.  I say check after 30 minutes because it's really OK to let the bird roast a little extra - you won't dry it out using my method if you let it go for 1/2 hour.</li><li>Figure your total cooking time from the time you first put the bird in the roaster.  Check your bird at the EARLIEST of these times:.</li><li>Unstuffed</li><li>8 to 12 pounds 	        2¾ to 3 hours.</li><li>12 to 14 pounds 	3 to 3¾ hours.</li><li>14 to 18 pounds 	3¾ to 4¼ hours.</li><li>18 to 20 pounds 	4¼ to 4½ hours.</li><li>Stuffed.</li><li>8 to 12 pounds 	        3 to 3½ hours.</li><li>12 to 14 pounds 	3½ to 4 hours.</li><li>14 to 18 pounds 	4 to 4¼ hours.</li><li>18 to 20 pounds 	4¼ to 4¾ hours.</li><li>When done, remove the bird from the roaster, tent with foil, and let rest for 20 minutes.  This allows the juices to really seep into the meat, so they say.</li><li>If you try this method, please let us know your results!  Happy Thanksgiving everyone!</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

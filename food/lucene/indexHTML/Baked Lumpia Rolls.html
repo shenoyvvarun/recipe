@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Baked Lumpia Rolls </h3><span>Pork,Meat,Filipino,Asian,Low in...,For large groups,Oven,Time to make,Equipment,Number of servings,Presentation</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://img.food.com/img/recipes/19/57/7/large/picPXNzFg.jpg" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>ground lean pork</li><li>carrot, chopped fine</li><li>onion, chopped fine</li><li>water chestnuts, drained and chopped fine</li><li>bamboo shoots, drained and chopped fine</li><li>garlic cloves</li><li>grated fresh ginger</li><li>soy sauce</li><li>black pepper</li><li>egg</li><li>packed brown sugar</li><li>distilled white vinegar</li><li>soy sauce</li><li>water</li><li>cornstarch, mixed with the water</li><li>freshly grated ginger</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>In a large bowl combine the pork, carrot, onion, water chestnut, bamboo shoots, garlic, ginger, soy sauce and pepper.</li><li>Stir mixture until thoroughly combined-at this point you can cover and stick in the fridge over night.</li><li>I lay out about 10 wrappers at a time, roll the meat mixture into cigar shapes about finger thickness-be reasonable-and the length of the wrapper.</li><li>Roll, brush ends with beaten egg and finish the roll to seal.</li><li>Place seam side down on a cookie sheet and repeat until done.</li><li>Bake in a preheated 450 degree oven, turning once for around 20 minutes.</li><li>They should be cooked through and the wrappers are golden brown.</li><li>Serve hot.</li><li>You can make these ahead of time and keep cooked lumpia in the fridge for up to 3 days, or frozen up to 4 weeks.</li><li>To reheat (thaw if frozen) bake on baking sheet in a 450 oven for 10 minutes-turn rolls once.</li><li>Dipping sauce----------------.</li><li>In a 3 quart saucepan mix together the brown sugar, vinegar and soy sauce.</li><li>Stir over high heat until sugar dissolves.</li><li>Mix the cornstarch/water and add to the sugar mixture and stir until mixture boils.</li><li>Remove from heat and stir in ginger.</li><li>Makes 2/3 cup and you can double.</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

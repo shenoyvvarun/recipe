@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Uncle Bill's Microwave Potato Chips </h3><span>Lunch/snacks,Potato,Vegetable,Low protein,Low cholesterol,Low sat. fat,Healthy 2,Healthy,Kid Friendly,Low in...,Microwave,5 ingredients or less,Time to make,Easy,Equipment,Presentation</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://img.food.com/img/recipes/47/19/5/large/picUDzY72.jpg" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>potatoes (russet, yellow gold, white or red potatoes)</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>If potatoes are old, peel and slice thin, less than 1/16" in thickness (paper thin), slicing across the potato.</li><li>If the potatoes are new or good skins, DO NOT PEEL, just scrub well, then slice them less than 1/16" in thickness (paper thin), slicing across the potato.</li><li>Place potato slices in a bowl, sprinkle with some salt (if desired) cover with cold water and let sit for 10 minutes.</li><li>Remove potato slices in batches onto paper toweling and pat dry.</li><li>If you have a microwave bacon tray, rub the tray with a vegetable oil, then place the sliced potatoes flat on the tray in a single layer.</li><li>Sprinkle with your choice of herbs or spices or just leave them plain.</li><li>Cover with a microwaveable, round heavy plastic cover.</li><li>Microwave on HIGH (full power) for 5 to 5 1/2 minutes or until they curl slightly and are a very light brown in color.</li><li>Cooking time could vary slightly, depending on the wattage of your microwave and the thickness of the slices.  The thinner the slices, the quicker they cook and the tastier they are.</li><li>You do not have to turn the sliced potatoes over.</li><li>If you do not have a bacon tray, use a microwave safe casserole dish.</li><li>Rub the inside of the dish with some olive oil for the first batch of potato chips.</li><li>I do not know why, but I find that if you do not rub oil the first time, some chips will tend to stick to the dish.</li><li>After the first batch is done, you do not have to rub the dish again.</li><li>Continue to microwave the remainder of sliced potatoes as noted above.</li><li>If using a bacon tray, after the first batch is cooked, you can reduce the microwaving time to 4 1/2 minutes and even less as you continue to microwave each batch.</li><li>NOTE:  You can also use PARCHMENT PAPER to microwave the potato slices.  Lightly spray or rub the parchment paper with some vegetable oil or a Pam spray. Place your potato slices on the parchment paper, then sprinkle them with whatever you like and then place another piece of parchment paper on top.  This will help microwave the  potatoes more evenly and they should turn out nice and crisp.  Microwaving time should be between 5 and 6 minutes.</li><li>ADDITIONAL IDEAS, suggested by Deb K:.</li><li>Granulated garlic powder with parsley.</li><li>Cracked black pepper, grated parmesan and sea salt sprinkled after removing from microwave.</li><li>Another, after removing chips from microwave, sprinkle with grated cheddar cheese, zap for a few seconds to melt the cheese, then add a dab of sour cream.</li><li>A great dip is Robert Rothschild Farm Dips:.</li><li>Emerald Isle Onion Dill and Horseradish Dip.</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

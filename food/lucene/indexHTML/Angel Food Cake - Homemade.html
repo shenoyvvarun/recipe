@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Angel Food Cake - Homemade </h3><span>Low cholesterol,Low sat. fat,Healthy 2,Healthy,Low in...,For large groups,Oven,Time to make,Equipment,Number of servings</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://img.food.com/img/recipes/12/59/1/large/pic0bYMBy.jpg" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>cake flour</li><li>sugar</li><li>sugar</li><li>egg whites, MUST be room temperature</li><li>cream of tartar</li><li>salt</li><li>sugar</li><li>vanilla</li><li>almond extract</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>Note: For those not use to making angel food cakes Don't get any yoke in the whites, if you do throw out and start over.  I always separate the egg in a glass first.  Then if no yoke pour into measuring container.</li><li>DO NOT GREASE PAN.</li><li>I always use a two piece angelfood cake pan.</li><li>Heat oven to 375°.</li><li>Sift the cake flour and 3/4 cup + 2 Tbsp sugar; set aside.</li><li>Combine the extracts in a small bowl; set aside.</li><li>Beat egg whites, cream of tartar and salt until it forms peaks.</li><li>Add the other 3/4 cup of sugar slowly, then beat on high until stiff peaks form.</li><li>If you have a mixing guard for your mixer bowl now would be a good time to attach it.</li><li>Beating on LOW, add flour mixture and extracts slowly.</li><li>Make sure you fold in the sides and bottom of your mixing bowl.</li><li>(You can fold in flour mixture by hand but this way is faster.) Spoon into an angel food cake pan.</li><li>Move a knife through batter to remove air pockets.</li><li>Bake 30-35 minutes or until top springs back when touched lightly with finger.</li><li>Invert pan onto a tin funnel to cool completely.</li><li>To remove the cake from your pan run a knife around the rim of the cake pan just to get the 'crust' away from the pan.</li><li>Then firmly spank the sides of your pan.</li><li>You could use a knife but this sometime tears the sides of the cake.</li><li>Invert onto your serve plate then take the knife to the now top which was the bottom of your pan and gently cut cake away from the  pan insert.</li><li>No need to cut around the center tube as you just give the cake a gently but firm tap or downward shake on to the plate.</li><li>Or you can pick up plate while holding onto the pan insert with your thumbs and firmly strike the bottom of the plate onto a folded towel.  (Just give it a slam down on the towel/table).</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

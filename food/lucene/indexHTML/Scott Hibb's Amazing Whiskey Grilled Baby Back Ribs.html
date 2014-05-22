@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Scott Hibb's Amazing Whiskey Grilled Baby Back Ribs </h3><span>Meat,Summer,Seasonal,Time to make,Equipment</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://img.food.com/img/recipes/59/77/6/large/picTeQmtP.jpg" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>baby back rib racks</li><li>ground red chili pepper</li><li>vegetable oil</li><li>minced onion</li><li>water</li><li>tomato paste</li><li>white vinegar</li><li>brown sugar</li><li>honey</li><li>Worcestershire sauce</li><li>salt</li><li>fresh coarse ground black pepper</li><li>liquid smoke flavoring</li><li>whiskey</li><li>garlic powder</li><li>paprika</li><li>onion powder</li><li>dark molasses</li><li>ground red chili pepper</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>Preheat oven to 300°F (150°C).</li><li>Cut each full rack of ribs in half, so that you have 4 half racks.</li><li>Sprinkle salt and pepper (more pepper than salt), and 1 tablespoon chili pepper over meat.</li><li>Wrap each half rack in aluminum foil.</li><li>Bake for 2 1/2 hours.</li><li>Meanwhile, heat oil in a medium saucepan over medium heat.</li><li>Cook and stir the onions in oil for 5 minutes.</li><li>Stir in water, tomato paste, vinegar, brown sugar, honey, and Worcestershire sauce.</li><li>Season with 2 teaspoons salt, 1/4 teaspoon black pepper, liquid smoke, whiskey, garlic powder, paprika, onion powder, dark molasses, and 1/2 tablespoon ground chili pepper.</li><li>Bring mixture to a boil, then reduce heat.</li><li>Simmer for 1 1/4 hours, uncovered, or until sauce thickens.</li><li>Remove from heat, and set sauce aside.</li><li>Preheat an outdoor grill for high heat.</li><li>Remove the ribs from the oven, and let stand 10 minutes.</li><li>Remove the racks from the foil, and place on the grill.</li><li>Grill the ribs for 3 to 4 minutes on each side.</li><li>Brush sauce on the ribs while they're grilling, just before you serve them (adding it too early will burn it).</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

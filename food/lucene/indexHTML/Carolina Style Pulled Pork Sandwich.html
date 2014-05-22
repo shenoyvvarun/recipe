@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Carolina Style Pulled Pork Sandwich </h3><span>One Dish meal,Lunch/snacks,Pork,Meat,North american,Egg Free,Free of...,Taste/mood,For large groups,Stove top,Served hot,Time to make,Inexpensive,Equipment,Number of servings,Presentation</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://img.food.com/img/recipes/11/61/73/large/picYJ4giS.jpg" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>onions, quartered</li><li>light brown sugar</li><li>paprika</li><li>salt</li><li>black pepper</li><li>boneless pork butt</li><li>apple cider vinegar</li><li>Worcestershire sauce</li><li>crushed red pepper flakes</li><li>sugar</li><li>dry mustard</li><li>garlic salt</li><li>cayenne (Spice it up a bit with 1/2 tspn)</li><li>yellow mustard</li><li>sugar</li><li>light brown sugar</li><li>apple cider vinegar</li><li>water</li><li>chili powder</li><li>black pepper</li><li>white pepper</li><li>cayenne</li><li>soy sauce</li><li>butter</li><li>liquid smoke</li><li>buns</li><li>Coleslaw</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>The Meat --.</li><li>Place the quartered onions in a crock pot.</li><li>Combine brown sugar, paprika, salt and pepper: rub over the roast.</li><li>Place the roast over the onions in the crock pot.</li><li>Combine the vinegar, Worcestershire Sauce, red pepper flakes, sugar, mustard, garlic salt and cayenne; stir to mix well.</li><li>Drizzle about 1/2 of the vinegar mixture over the roast and cover.  Refrigerate the remaining vinegar mixture.</li><li>Cook on low up to 18 hours, but at least 12 hours.  Drizzle the other half of the vinegar mixture over the roast during the last 1/2 hour of cooking.</li><li>While the meat is cooking, prepare the barbecue sauce.  Mix all ingredients except soy sauce, butter and smoke.  Simmer, uncovered, on low heat for 30 minutes.  Stir in the remaining ingredients and simmer, uncovered, for 10 more minutes.  Set aside to cool.</li><li>Remove the meat from the crock pot and allow to rest for at least 15 minutes. (Very important step -- longer is better).</li><li>Remove the onions and chop to a fine consistency.</li><li>Pull apart the meat with a couple of forks.  Meat should have a shredded look to it.</li><li>Mix chopped onions and shredded pork along with a little bit of juice from the crock pot to taste.  Add sufficient barbecue sauce to the mixture to achieve desired taste.  Meat should have distinctive barbecue flavor.</li><li>To serve, spread barbecue sauce on bottom of a hearty bun.</li><li>Put layer of pulled pork on bun.  Spread barbecue sauce over meat.</li><li>Add layer of your favorite cole slaw on top of meat.  Layer some more barbecue sauce over cole slaw.</li><li>Spread top of bun with more sauce.</li><li>Grab a fist full of napkins, and enjoy.</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

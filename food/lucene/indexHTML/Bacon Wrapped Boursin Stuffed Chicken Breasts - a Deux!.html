@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Bacon Wrapped Boursin Stuffed Chicken Breasts - a Deux! </h3><span>Lunch/snacks,Chicken breast,Pork,Poultry,Cheese,Eggs/dairy,Meat,European,Romantic,Savory,Taste/mood,For 1 or 2,Oven,Served hot,Time to make,Equipment,Number of servings,Presentation</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://img.food.com/img/recipes/21/47/40/large/picMv4Qet.jpg" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>boneless skinless chicken breasts</li><li>olive oil</li><li>cherry tomatoes, on the vine</li><li>lemon, juice of</li><li>creme fraiche (optional)</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>Pre-heat the oven to 190C/375F/Gas 5.</li><li>Lightly oil an oven proof dish with the teaspoon of olive oil - using a pastry brush is best.</li><li>Place one chicken breast between a large piece of cling film and gently beat it  with a cook's mallet - beating until large and fairly thin - try NOT make any holes in the chicken! Repeat with the second chicken breast.</li><li>Place the chicken breasts on a work board and spread half the Boursin cheese on each chicken piece - make sure it is spread evenly right up to the edges.</li><li>Roll the chicken breasts up - tucking the last small "fillet" flap up and into the stuffed roll.</li><li>Wrap the bacon pieces or pancetta ham around the stuffed chicken, making sure they do not overlap too much and the edges are sealed underneath.</li><li>Gently lift them into the oiled oven dish.</li><li>Season well with freshly ground black pepper. (Season with salt to taste - the bacon will make it quite salty, so watch out when seasoning with salt.).</li><li>If using the lemon juice, pour over the top of the chicken breasts now.</li><li>Scatter or arrange the cherry tomatoes around the chicken pieces. (I like to keep them on the vine.).</li><li>Place in the middle of a pre-heated oven and roast for between 45 - 55 minutes; the cooking time depends on the size of the chicken breasts and your oven.</li><li>Remove from the oven and place the chicken breasts on a plate - you can serve them whole or sliced. Garnish with watercress, as well as the roasted cherry tomatoes.</li><li>Serve with a selection of seasonal fresh vegetables and a jacket potato, making sure you spoon the excess Boursin sauce over the top of the chicken pieces and the roasted cherry tomatoes!</li><li>Tip:You can make an optional creamy sauce. On taking the chicken out of the oven, add the creme fraiche and white wine to the Boursin cooking juices in the oven dish, whisk together and then gently heat, whisking all the time, over medium heat on top of the stove, or decant the creme fraiche, wine and juices to a small saucepan and heat the sauce in the pan. (Make sure to keep the chicken warm whilst you do this.).</li><li>TO FREEZE:.</li><li>As soon as you have stuffed and wrapped the bacon around the beaten chicken breasts, wrap individually in cling film and put into a freezer container or a freezer bag. Take them out as required and allow to defrost for 4-5 hours at room temperature or overnight in the fridge.</li><li>Cook as above.</li><li>Can be frozen for up to 3 months with no adverse effects on the Boursin cheese.</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Souvlaki </h3><span>One Dish meal,Lunch/snacks,Pork loins,Pork,Meat,Greek,European,Kid Friendly,Time to make,Number of servings</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://img.food.com/img/recipes/81/72/5/large/piczkK64g.jpg" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>pork tenderloin, cut up into 1 1/2 x 1 1/2 inch cubes (or the meat of your choice)</li><li>olive oil</li><li>Worcestershire sauce (not traditional, but I like the flavour it adds)</li><li>garlic cloves, minced</li><li>hot pepper flakes (I use a whole dried one, crumbled)</li><li>dried oregano</li><li>lemon, juice of</li><li>greek pita bread</li><li>onion, sliced thin</li><li>tomato, sliced thin</li><li>tzatziki (Tzatziki)</li><li>chopped parsley</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>To marinate meat: Cut tenderloin into bite-size chunks and put into a Tupperware with remaining marinade ingredients.</li><li>Swish everything around to distribute, put in fridge and forget for a day (this long marination is not absolutely necessary- but longer means more flavour. If you haven't the time, just do what you can).</li><li>When ready to BBQ, skewer meat onto metal or wooden skewers (remember to soak the wooden skewers in water for at least 1/2 an hour first) and bbq until the meat is nicely brown all over, and you know you can't possibly wait any longer to eat.</li><li>To prepare the fixings: As you are barbecuing the meat, brush as many pita breads as there are souvlaki generously with olive oil and put on the bbq to crisp slightly or alternatively, into a hot frying pan, and cook about 30-45 seconds per side or until starting to brown and give off a yummy,'toasty' smell.</li><li>Here is the 'technique' part.</li><li>Have cut some squares of foil a bit larger than the pita breads.</li><li>Put a square in the palm of your hand and lay a pita in the centre sitting in your flat palm.</li><li>Take a skewer of meat and place in center of pita.</li><li>Squeeze palm shut around meat to get a grip with the pita and pull out skewer, leaving meat inside the bread.</li><li>Open up your palm slightly, making the pita gape open and throw in some onion, slices of tomato, a good dollop of tzatziki, some parsley, along with a healthy shake of salt.</li><li>Roll sandwich up by squeezing palm again (gently this time as the salad stuff is inside) and enclosing neatly with the foil, giving a twist on the bottom so no yummy juices drip out onto your clothes as you are eating this!</li><li>Enjoy our contribution to fast-food!</li><li>You will never settle for a Big Mac again!</li><li>To freeze: Place meat and marinade in a freezer bag or rigid freezer container.</li><li>To serve: Thaw in fridge overnight and proceed with cooking directions.</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Chinese Pot Stickers </h3><span>Lunch/snacks,Pork,Vegetable,Meat,Chinese,Asian,Christmas,Heirloom/historical,Freezer,Stove top,Time to make,Equipment,Number of servings</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://img.food.com/img/recipes/13/32/0/large/picg3qsZS.jpg" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>cabbage, finely chopped</li><li>salt</li><li>shrimp, peeled, deveined and finely chopped</li><li>lean pork, ground</li><li>light soy sauce</li><li>green onion, chopped</li><li>sesame oil</li><li>fresh ginger, chopped</li><li>garlic cloves, minced</li><li>wonton wrappers (usually 1 pkg)</li><li>vegetable oil</li><li>chicken stock</li><li>light soy sauce</li><li>rice vinegar</li><li>fresh ginger, minced</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>Sprinkle salt over the shredded cabbage and let stand for 5 minutes, then squeeze out liquid.</li><li>Squeeze out any liquid from the shrimp.</li><li>Mix cabbage, shrimp, pork, soy, wine, onion, oil, ginger and garlic (filling can be mixed and refrigerated for up to 6 hours in advance).</li><li>On each wrapper (keep them covered with a damp cloth so they do no dry out) place about 2 tsp of the mix and seal the edges, use a bit of water on the edge, try to press out all the air and ensure they are tightly sealed (At this point you can freeze them individually on a cookie sheet and them place in a plastic bag. They will keep for a month. Defrost in fridge before continuing).</li><li>In 2 large skillets heat 1 tbsp oil, fry 16 dumplings for 1 minute or until golden on one side add 1/4 cup of stock into the pan, reduce heat to low, cover and cook, without turning for about 7 minutes or until the dumpling is translucent and most of the liquid has evaporated Uncover and on higher heat cook for another 5-7 minutes or until the bottoms are dark brown, drain put on a platter and keep warm.</li><li>Repeat for the remaining 32 dumplings.</li><li>Mix the dipping sauce and serve with warm or hot dumplings.</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

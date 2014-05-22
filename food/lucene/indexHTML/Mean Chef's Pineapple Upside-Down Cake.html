@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Mean Chef's Pineapple Upside-Down Cake </h3><span>Pineapple,Tropical fruits,Fruit,Low protein,Low in...,Weeknight,Time to make,Number of servings</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://img.food.com/img/recipes/53/51/6/large/pic2vs5No.jpg" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>pineapple slices (rings from 1 1/2 20 ounce cans packed in Unsweetened pineapple juice)</li><li>pecan halves</li><li>all-purpose flour</li><li>baking powder</li><li>salt, preferably kosher</li><li>pure vanilla extract</li><li>unsalted butter, divided and at room tempature</li><li>dark brown sugar (lightly packed)</li><li>Bourbon (optional)</li><li>granulated sugar</li><li>eggs, at room temperature</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>Preheat oven to 350 degrees.</li><li>Use a 10-inch (measure across the bottom) cast iron pan. (although this cake can be made in a round cake pan, it is better if you use cast iron).</li><li>Drain pineapple slices and place on paper towels to absorb moisture. (you will need 8 whole slices; the other 6 will be cut in half).</li><li>Whisk or stir the flour, baking powder, and salt together just to blend; set aside.</li><li>In a separate bowl, stir the vanilla into the creme fraiche or sour cream; set aside.</li><li>Melt 2 oz of butter in the cast iron pan.</li><li>Add the brown sugar and bourbon (if using) and cook over medium heat, stirring with a wooden spoon, until the sugar melts.</li><li>Place 1 whole pineapple slice in the center of the pan and 7 whole slices surrounding it.</li><li>Place the half slices side by side against the sides of the pan, the two cut edges down touching the brown sugar.</li><li>Place pecan halves in the middle of each pineapple slice and in the gaps between the fruit.</li><li>Place remaining butter (4 oz.) and the granulated sugar in the bowl of a mixer fitted with the paddle attachment, or use a hand-held mixer, and beat on medium-high speed until the mixture is smooth and creamy, scraping down the sides of the bowl with a rubber spatula as needed.</li><li>The butter and sugar must be beaten until light and fluffy; don't rush it- the process can take 3 to 4 minutes with a heavy-duty mixer and 6 to 8 minutes with a hand-held mixer.</li><li>Reduce speed to medium adding eggs one at a time, beating well after each addition.</li><li>Working with a rubber spatula, carefully fold in dry ingredients and creme fraiche alternately- 3 additions of dry ingredients, 2 of creme fraiche. (you will end up with a thick batter).</li><li>Spoon batter over pineapple and smooth the top by spreading the batter with an offset spatula.</li><li>Put the cast iron pan in the oven and bake for 20 to 35 minutes, or until a toothpick inserted in the center of cake comes out clean (test in a couple places to be certain).</li><li>As soon as the cake is removed from the oven, turn it out onto a round plate large enough to hold the cake.</li><li>If any of the fruit sticks to the skillet, use a small spatula to place it back on the cake.</li><li>NOTE: The cake can be kept wrapped in plastic at room temperature overnight.</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

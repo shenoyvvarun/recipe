@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Pastitsio (Oamc) </h3><span>One Dish meal,Ravioli/tortellini,Cheese,Egg,Eggs/dairy,Meat,Pasta, rice and grains,Greek,European,Weeknight,Time to make,Number of servings</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://img.food.com/img/recipes/59/73/3/large/pic3avXpq.jpg" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>onions, finely chopped</li><li>garlic cloves, minced</li><li>lean ground meat (I often use a combo of beef and pork, lamb would be good too, but go heavier on the beef)</li><li>diced tomatoes with juice (concasse)</li><li>chopped pitted kalamata olive (optional)</li><li>salt</li><li>pepper</li><li>dried oregano</li><li>bay leaf</li><li>red wine</li><li>cinnamon stick, broken in two</li><li>melted butter</li><li>whole milk</li><li>eggs, beaten</li><li>butter</li><li>flour</li><li>milk</li><li>salt</li><li>pepper</li><li>nutmeg</li><li>eggs</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>For the meat sauce, put some olive oil in a large pot; saute onion until lightly browned; add garlic; add meat and cook until brown, crumbling with a fork; add remaining meat sauce ingredients to skillet; mix well; cover and simmer for 1 hour, stirring occasionally, until quite thick; let mixture cool; remove and discard cinnamon stick and bay leaf.</li><li>Prepare pasta by boiling until al dente in plenty of boiling, salted water; drain and place pasta in a large bowl; add butter, milk, eggs and 1/2 cup cheese; gently stir to coat; set aside.</li><li>To prepare bechamel sauce, melt butter over medium heat in a saucepan; stir in flour until smooth, cook, whisking for 2 minutes; gradually add milk, stirring, until thickened; lower heat; add salt, pepper and nutmeg; remove from heat.</li><li>In medium-sized bowl, beat 3 eggs; slowly add hot cream sauce to eggs; stir thoroughly so eggs don't curdle.</li><li>Preheat oven to 350°F and butter or oil (with olive oil) a large baking pan (my pan is about 18" x 10").</li><li>Empty 1/2 of the penne mixture over bottom of pan; cover evenly with all of meat sauce; sprinkle 1/3 of the cheese over meat sauce; add remaining penne mixture, spreading evenly; sprinkle another 1/3 of the cheese over top; pour bechamel sauce evenly over entire casserole; top with remaining cheese.</li><li>Bake until bechamel sauce sets and has golden-brown patches across top, approximately 45 minutes to 1 hour; cool at least 20 minutes before cutting into pieces for serving.</li><li>Freezer Notes:  Once the baked pastitsio has completely cooked, cut serving-size pieces, double-wrap in foil and freeze.  Defrost in the usual manner and reheat in microwave (or oven) for a delicious, quick meal, when there's little time to cook and dinner is ready and waiting in the freezer!</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

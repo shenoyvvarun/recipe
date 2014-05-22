@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Mexican Rice </h3><span>Long Grain rice,Rice,Pasta, rice and grains,North american,Mexican,Lactose Free,Low protein,Low cholesterol,Low sat. fat,Healthy 2,Free of...,Low in...,Time to make,Inexpensive</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://img.food.com/img/recipes/11/78/92/large/picW7Ko64.jpg" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>tomatoes, very ripe and cored</li><li>white onion</li><li>jalapenos</li><li>long grain white rice</li><li>canola oil</li><li>minced garlic cloves</li><li>chicken broth</li><li>tomato paste (may omit if using canned tomatoes)</li><li>salt</li><li>fresh cilantro, minced</li><li>lime</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>Adjust rack to middle position and preheat oven to 350.</li><li>Process tomato and onion in processor or blender until pureed and thoroughly smooth. Transfer mixture to measuring cup and reserve exactly 2 cups. Discard excess.</li><li>Remove ribs and seeds from 2 jalapenos and discard. Mince flesh and set aside. Mince remaining jalapeno. Set aside.</li><li>Place rice in a fine mesh strainer and rinse under cold running water until water runs clear- about 1 1/2 minutes.Shake rice vigorously to remove excess water.This step removes the starch from the rice so it will not stick. IF YOU OMIT THIS STEP YOUR RICE WILL NOT BE DRY AND FLUFFY.</li><li>Heat oil in heavy bottomed ovensafe 12 inch straight sided sautee pan or Dutch oven with tight fitting lid over low-medium heat about 2 minutes. (The recipe is very specific about this but I used a 10 inch dutch oven and it worked out fine.) Drop a few rice grains in and if they sizzle then it is ready. Add rice and fry stirring until rice is light golden and translucent, about 6-8 minutes.  Be careful that the oil doesn't get too hot too fast or the oil will splatter.</li><li>Reduce heat to medium, add garlic and 2 minced jalapenos and cook , stirring constantly until fragrant, about 1 1/2 minutes.</li><li>Stir in broth, pureed mixture,tomato paste, and salt. Increase heat to medium high, and bring to a boil.</li><li>Cover pan and transfer pan to oven to bake until liquid is absorbed and rice is tender, 30-35 minutes.Stir well after 15 minutes.</li><li>Stir in cilantro, minced jalapeno to taste, and pass lime wedges separately.</li><li>Edited to add 6-15-05: If you can't get good fresh tomatoes you are better off using canned tomatoes. Don't use those awful hard and underipe tomatoes that are at most supermarket chains. Just be sure that the processed tomatoes and the one onion equals 2 cups. One the other hand- if you find that after processing your tomatoes and onions that you have less than 2 cups- simply add enough bottled salsa to make up the difference.</li><li>Edited 8-21-06: Do not skip any of the steps. It may seem stupid- but rinsing the rice to remove the starch is very important if you want fluffy rice. It will only take two minutes of your time but it makes the difference.</li><li>Edited 8-15-08: Leftovers are just as delicious the next day so this is a perfect dish to make ahead time for potlucks. This rice also freezes well. For Freezing Ahead: Cool, portion and freeze in a ziploc bag. To reheat from frozen: Place in a pyrex dish and warm in the microwave, stirring every 2-3 minutes until heated through.</li><li>You'll love this rice! Money back guarantee.</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Chicken Makhani (Indian Butter Chicken) </h3><span>Chicken thigh & leg,Poultry,Meat,Asian,Indian,Spicy,Savory,Taste/mood,Time to make</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://pictures.food.com/api/file/MvxpdnICR06jvQ7SY4M1-Screen-Shot-2014-02-26-at-8.30.39-PM.png/convert?loc=/pictures.food.com/recipes/97/57/3/LiV5imF4TEIWuYjHOhg9_Screen%20Shot%202014-02-26%20at%208.30.39%20PM.png&width=266" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>peanut oil</li><li>shallot, finely chopped</li><li>white onion, chopped</li><li>butter</li><li>lemon juice</li><li>ginger-garlic paste</li><li>garam masala</li><li>chili powder</li><li>ground cumin</li><li>bay leaf</li><li>plain yogurt</li><li>half-and-half</li><li>tomato puree</li><li>cayenne pepper, to taste</li><li>salt</li><li>black pepper</li><li>peanut oil</li><li>boneless skinless chicken thighs, cut into bite size pieces</li><li>garam masala</li><li>cayenne pepper</li><li>cornstarch</li><li>water</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>Heat 1 tablespoon oil in a large saucepan over medium high heat.</li><li>Saute shallot and onion until soft and translucent.</li><li>Stir in butter, lemon juice, ginger garlic paste, 1 teaspoon garam masala, chili powder, cumin and bay leaf.</li><li>Cook, stirring, for 1 minute.</li><li>Add tomato puree and cook for 2 minutes, stirring frequently.</li><li>Stir in half-and-half and yogurt.</li><li>Reduce heat to low and simmer for 10 minutes, stirring frequently.</li><li>Season with salt, pepper and cayenne.</li><li>Remove from heat and set aside.</li><li>Heat 1 tablespoon oil in a large heavy skillt over medium heat.</li><li>Cook chicken until lightly browned, about 10 minutes.</li><li>Reduce heat and season with 1 teaspoon garam masala and cayenne.</li><li>Stir in about 1/3 of the sauce and simmer until liquid has reduced and chicken is no longer pink, about 5 minutes.</li><li>Pour the rest of the sauce into the chicken.</li><li>Mix together cornstarch and water, then stir into the sauce.</li><li>Cook for 5 to 10 minutes, or until thickened.</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Good Eats Roast Turkey </h3><span>Whole turkey,Poultry,Meat,North american,Kid Friendly,Winter,Christmas,Thanksgiving,Weeknight,Heirloom/historical,Seasonal,Taste/mood,Roast,For large groups,Oven,Time to make,Equipment,Number of servings</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://img.food.com/img/recipes/99/54/large/piczcIkmY.jpg" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>frozen young turkey</li><li>kosher salt</li><li>light brown sugar</li><li>vegetable stock</li><li>black peppercorns</li><li>allspice berry</li><li>candied ginger</li><li>ice water</li><li>red apple, sliced</li><li>onion, sliced</li><li>cinnamon stick</li><li>water</li><li>rosemary</li><li>sage</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>Combine all brine ingredients, except ice water, in a stock pot and bring to a boil.</li><li>Stir to dissolve solids, then remove from heat, cool to room temperature refrigerate until thoroughly chilled.</li><li>Early on the day of cooking, (or late the night before) combine the brine and ice water in a clean 5 gallon bucket.</li><li>Place thawed turkey breast side down in brine, cover, and refrigerate or set in cool area (like a basement) for 6 hours.</li><li>Turn turkey over once, half way through brining.</li><li>A few minutes before roasting, heat oven to 500 degrees.</li><li>Combine the apple, onion, cinnamon stick and cup of water in a microwave safe dish and microwave on high for 5 minutes.</li><li>Remove bird from brine and rinse inside and out with cold water.</li><li>Discard brine.</li><li>Place bird on roasting rack inside wide, low pan and pat dry with paper towels.</li><li>Add steeped aromatics to cavity along with rosemary and sage.</li><li>Tuck back wings and coat whole bird liberally with canola (or other neutral) oil.</li><li>Roast on lowest level of the oven at 500F for 30 minutes.</li><li>Remove from oven and cover breast with double layer of aluminum foil, insert probe thermometer into thickest part of the breast and return to oven, reducing temperature to 350°F.</li><li>Set thermometer alarm (if available) to 161°F.</li><li>A 14-16 pound bird should require a total of 2-2 1/2 hours  of roasting.</li><li>Let turkey rest, loosely covered for 15 minutes before carving.</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

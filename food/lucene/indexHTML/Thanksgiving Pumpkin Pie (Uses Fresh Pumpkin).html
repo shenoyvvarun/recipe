@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Thanksgiving Pumpkin Pie (Uses Fresh Pumpkin) </h3><span>Pie,Pies and tarts,Eggs/dairy,Vegetable,North american,Thanksgiving,Oven,Time to make,Equipment</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://img.food.com/img/recipes/10/59/77/large/picLNlyAq.jpg" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>unbaked 9-inch deep dish pie pastry (9-10-inch)</li><li>freshly cooked pumpkin, seeded, peeled, mashed</li><li>granulated sugar</li><li>salt</li><li>ground cinnamon</li><li>ground ginger</li><li>ground nutmeg</li><li>ground cloves</li><li>eggs, beaten lightly</li><li>evaporated skim milk</li><li>skim milk</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>(To make your own freshly cooked pumpkin, quarter 1-2 small pie pumpkins, de-stem, seed and de-string them.  Then steam them in a steamer over boiling water until very tender--the skin will peel right off.  Then mash them using a stick blender or a food processor-hand mashing will somtimes produce lumps/strings so unless you like that, go for the stick blender/processor).</li><li>Preheat oven to 400°F and have ready a pie shield and a large rimmed cookie sheet.</li><li>Line a DEEP DISH  glass pie plate with the pie pastry round, fluting the edges decoratively as desired.</li><li>Combine in order the pumpkin, sugar, salt, cinnamon, ginger, nutmeg, and cloves.</li><li>Lightly beat eggs together with both milks, then add to the pumpkin mixture, stirring well to combine--it will be rather thin.</li><li>Pour as much filling as you can into unbaked pie pastry and bake at 400°F for 50 minutes (or until knife inserted halfway between center and edge comes out without any goo on it).  If there is any extra filling use to fill a smaller mini pie plate or discard.</li><li>NOTE: Set cookie sheet on the rack below the rack you are setting your pie plate on in order to catch any drips.</li><li>If the pie edges start overbrowning, place a pie shield or a ring of foil over the edges--this will be needed or not depending on the type of pastry you use.</li><li>Pie should be served chilled and should be stored in the refrigerator.</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

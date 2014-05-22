@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Famous Challah </h3><span>Yeast breads,Breads,Healthy,Kosher,Heirloom/historical,For 1 or 2,Oven,Time to make,Equipment,Number of servings</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://img.food.com/img/recipes/90/76/5/large/picyFtpEO.jpg" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>all-purpose flour, plus</li><li>all-purpose flour</li><li>dry yeast</li><li>egg, beaten</li><li>vegetable oil</li><li>salt</li><li>sugar</li><li>warm water (80 -90)</li><li>egg, beaten</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>First measure out all your ingredients.</li><li>Now from the 1/2 of cup sugar take 1 tablespoon of the sugar & combine it with the yeast& warm water (you know you have the right temperature of warm water when it's the same temperature as the inside of your wrist).</li><li>I let my mixer bowl which is metal (kitchen aid) sit in a hot water bath while the yeast dissolves, 10 minutes.</li><li>After the yeast has dissolved (it's nice & foamy) add to it the rest of the sugar, salt & 3 1/2 cups flour.</li><li>Mix well (I use the bread hook).</li><li>Add egg (already beaten) & oil.</li><li>Slowly start mixing in most of the remaining 3 1/2 cups of flour.</li><li>The dough will become quite thick.</li><li>When the dough pulls away from the sides of the bowl, turn it onto a floured surface& knead for approximately 10 minute.</li><li>Add only enough additional flour to make dough manageable.</li><li>Knead until dough has acquired a "life of its own"; it should be smooth & elastic, springing back when pressed lightly with your fingertip.</li><li>Place dough into a large oiled bowl turning the dough once so its oiled on all sides.</li><li>Cover with a damp towel & let rise in a warm place for 2 hours, punching down in 4-5 places every 20 minutes.</li><li>Now, I always write down what time I started so I don't forget when the 2 hours are up & set a timer every 20 minutes.  (In the summer I let the dough rise on my balcony & in the winter in front of my oven where something is always baking, turning it every time I punch down the dough).</li><li>After the 2 hours, turn your dough onto your working surface.</li><li>Now comes the forming part.</li><li>For Shabbos I always make a 2 level braided challah which looks great & is really easy.</li><li>Prepare your baking sheet lining it with parchment paper.</li><li>Preheat oven to 375°F.</li><li>First, take a large knife & cut the dough in half.</li><li>Next, from each 1/2 now cut off a third & place the 2 thirds on the side.</li><li>Now, from the first half (where you've removed a third) divide the remaining dough into approximately equal thirds.</li><li>Roll each third out till its about 10-12 inches (I'm guessing I never measured it) & braid all 3 roll together pinching the top & bottom half together& turning them slightly under.</li><li>Place on baking sheet.</li><li>Repeat the same for other half.</li><li>Now take the first third you removed earlier& divide in 3, braid just like you did before& place on top of the already braided challah.</li><li>Repeat same for other third.</li><li>Now let the challah rise for 1/2 an hour.</li><li>After the challah has risen glaze with beaten egg & add mohn or sesame if you wish.</li><li>Almost done!</li><li>Put in preheated oven & let bake for exactly 25 minutes!</li><li>Turn off oven & leave Challahs in for exactly another 10 minutes!</li><li>Remove from oven.</li><li>Enjoy--you deserve every compliment you get!</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

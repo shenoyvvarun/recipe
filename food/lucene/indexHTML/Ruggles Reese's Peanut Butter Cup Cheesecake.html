@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Ruggles Reese's Peanut Butter Cup Cheesecake </h3><span>Cheesecake,Time to make</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://img.food.com/img/recipes/11/49/07/large/picS3pMYX.jpg" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>crushed Oreo cookies</li><li>chopped roasted peanuts</li><li>butter, melted</li><li>cream cheese, softened</li><li>eggs, at room temperature</li><li>firmly packed brown sugar</li><li>smooth peanut butter (not natural-style)</li><li>whipping cream</li><li>vanilla extract</li><li>Reese's Peanut Butter cups, broken into small pieces</li><li>sour cream</li><li>sugar</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>Please Note****Plan ahead--cheesecake needs to chill for at least 4 hours.</li><li>To Make The Crust:.</li><li>Combine crushed Oreo cookies and peanuts that have been ground in a food processor with the melted butter.</li><li>Pat the crust mixture onto bottom and sides of a 10-inch springform pan.</li><li>To Make The Filling:.</li><li>Beat cream cheese in bowl of electric mixer until smooth.</li><li>Add eggs, one at a time, beating well after each addition.</li><li>Add sugar, peanut butter and cream; mix until smooth.</li><li>Stir in vanilla, then fold in peanut butter cup pieces with a rubber spatula.</li><li>Pour filling into prepared crust.</li><li>Place springform pan into a larger baking pan.</li><li>Pour hot water into the larger pan so that the water comes 1 inch up the sides of the springform pan.</li><li>Bake at 275°F 1-1/2 hours, or until firm and lightly browned.</li><li>For The Topping:.</li><li>Combine the sour cream and sugar and spread on the cheesecake.</li><li>Return the cake to the oven for 5 minutes.</li><li>Remove from the oven and allow to cool on a wire rack for one hour.</li><li>You may run a knife along the edge of the cake to loosen it from the pan somewhat.</li><li>Refrigerate for at least 4 hours.</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

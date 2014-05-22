@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Traditional Tamales (Pork) </h3><span>Pork,Meat,North american,Mexican,Spicy,Taste/mood,Steam,Time to make,Number of servings,Technique</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://img.food.com/img/recipes/15/28/6/large/picBO2LoY.jpg" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>water</li><li>onion, quartered</li><li>garlic cloves, minced</li><li>salt</li><li>red chili sauce (see Red Chili Sauce (To Be Used With Traditional Tamales) for red chili sauce)</li><li>shortening</li><li>masa harina</li><li>baking powder</li><li>dried corn husks (about 8 inches long)</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>In a 5 qt Dutch oven, bring pork, water, onion, garlic and 1 1/2 salt to boil.</li><li>Simmer covered, about 2 1/2 hours or until meat is very tender.</li><li>Remove meat from broth and allow both meat and broth to cool. (Chilling the broth will allow you to easily remove the fat if you desire to do so).</li><li>Shred the meat using 2 forks, discarding fat.</li><li>Strain the broth and reserve 6 cups.</li><li>In a large sauce pan, heat the red chili sauce and add meat; simmer, covered for 10 minutes.</li><li>To make masa beat shortening on medium speed in a large bowl for 1 minute.</li><li>In a separate bowl, stir together masa harina, baking powder and 2 teaspoons salt.</li><li>Alternately add masa harina mixture and broth to shortening, beating well after each addition. (Add just enough broth to make a thick, creamy paste).</li><li>In the mean time, soak corn husks in warm water for at least 20 minutes; rinse to remove any corn silk and drain well.</li><li>To assemble each tamale, spread 2 tablespoons of the masa mixture on the center of the corn husk (each husk should be 8 inches long and 6 inches wide at the top. If husks are small, overlap 2 small ones to form one. If it is large, tear a strip from the side).</li><li>Place about 1 tablespoon meat and sauce mixture in the middle of the masa.</li><li>Fold in sides of husk and fold up the bottom.</li><li>Place a mound of extra husks or a foil ball in the center of a steamer basket placed in a Dutch oven.</li><li>Lean the tamales in the basket, open side up.</li><li>Add water to Dutch oven just below the basket.</li><li>Bring water to boil and reduce heat.</li><li>Cover and steam 40 minutes, adding water when necessary.</li><li>To freeze these for future meals, leave them in the husks and place them in freezer bags.  To reheat, thaw and wrap in a wet paper towel and reheat in the microwave for 2 minutes for one or two or re-steam them just until hot.</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

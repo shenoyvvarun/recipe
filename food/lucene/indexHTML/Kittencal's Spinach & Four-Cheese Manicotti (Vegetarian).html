@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Kittencal's Spinach & Four-Cheese Manicotti (Vegetarian) </h3><span>Manicotti,Pasta, rice and grains,Time to make</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://img.food.com/img/recipes/72/30/8/large/picy9NScS.jpg" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>oil</li><li>onion, finely chopped (optional)</li><li>fresh garlic (no more than that or the garlic will overpower the other ingredients!)</li><li>ricotta cheese</li><li>shredded mozzarella cheese, divided (can use a bit more)</li><li>cream cheese, softened</li><li>grated parmesan cheese (can use more)</li><li>italian seasoning</li><li>fresh ground black pepper (or to taste)</li><li>frozen chopped spinach (cooked according to package directions, then hand-squeezed dry to remove excess moisture)</li><li>manicotti, cooked and drained (you might use more shells so I would cook 10)</li><li>marinara sauce (see my Kittencal's Marinara Pasta Sauce (Vegetarian))</li><li>parmesan cheese (or to taste)</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>Set oven to 350 degrees F.</li><li>Butter a 13 x 9-inch baking dish.</li><li>In a skillet, saute onion (if using) in oil for about 4 minutes or until softened (adding in the garlic the last 2 minutes).</li><li>In a mixing bowl combine the ricotta cheese, 1-1/2 cup mozza cheese, cream cheese, 6 tablespoons Parmesan cheese, Italian seasoning; beat with a wooden spoon until smooth and well combined.</li><li>Season with white salt or seasoned salt and black pepper to taste.</li><li>Stir in onion mixture and spinach; mix well to combine.</li><li>Spoon into cooked and cooled manicotti shells.</li><li>Pour half of the pasta sauce into the prepared baking dish.</li><li>Arrange shells over sauce (at this point you may cover and refrigerate for up to 24 hours, or continue with the recipe as follows).</li><li>Top with the remaining sauce, use a spoon to spread the sauce over the shells (the sauce does not have to cover the shells completely).</li><li>Sprinkle about 1/4 cup Parmesan cheese (or to taste) over the sauce.</li><li>Cover and bake for 25 minutes.</li><li>Uncover and top with mozzeralla cheese (any amount desired).</li><li>Bake 5 mins longer, or until cheese is melted.</li><li>Let stand 10 mins before serving.</li><li>Note; If desired the spinach can be omitted completely.</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

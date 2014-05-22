@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Easy Spicy Shrimp Pasta - Low Fat </h3><span>Pasta, rice and grains,Caribbean,Central american,North american,Low sat. fat,Healthy,Low in...,Romantic,Taste/mood,For 1 or 2,Time to make,Easy,Number of servings</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://img.food.com/img/recipes/14/47/28/large/picQsqjOV.jpg" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>shrimp, peeled and deveined</li><li>pasta, any kind</li><li>garlic cloves, minced</li><li>green onions, chopped</li><li>lemon, juice and zest of, about 2 Tbsp juice</li><li>salt</li><li>dry white wine</li><li>tomato, chopped</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>Boil the pasta in salted water until it is done to your liking.</li><li>Drain well reserving about 1 cup of pasta water.</li><li>Place pasta in serving bowl or divide among two dinner bowls.</li><li>While pasta water is heating zest and juice lemon and prepare all ingredients. This recipe will go FAST!</li><li>After adding pasta to boiling water, sprinkle a small amount of olive oil in a cold nonstick skillet and smear around with your CLEAN fingers. (Massage oil left on your fingers into your hands - it will make them silky soft.).</li><li>Turn heat on to medium high and let the pan warm for a minute or two. You want the pan to just be warm when you hold your hand over the surface.</li><li>Add the shrimp, garlic, onion, lemon rind, and pepper and cook stirring constantly for 2-3 minutes. Shrimp will just start to turn opaque but not yet pink.</li><li>Add tomatoes, salt, basil, lemon juice, and white wine. Stir and cook for another 2-3 minutes or until shrimp turn pink. (If using dried basil crush in hand before adding to pan to release oils. A different herb can be substituted if you prefer- just use the same quantity.).</li><li>Add in as much of the 1 cup reserved pasta water as you like- if any- to make as much sauce as you would like.</li><li>Taste sauce and adjust seasonings to your taste. If you would like a more onion or garlic flavor, add onion or garlic powder.</li><li>Spoon over drained pasta and garnish with fresh black pepper or additional pepper flakes if desired.</li><li>Other nice garnishes would be a little chopped parsley or green onion as well as a sprinkling of fresh grated parmesan.</li><li>Light the candles, top off the wine glasses and serve!</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

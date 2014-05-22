@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> German Chocolate Cake With Coconut Pecan Frosting </h3><span>Coconut,Fruit,Nuts,Sweet,Weeknight,Taste/mood,Mixer,Oven,Small appliance,Time to make,Equipment</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://img.food.com/img/recipes/59/34/6/large/picMrcQWJ.jpg" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>sweet dark chocolate</li><li>water</li><li>flour</li><li>baking soda</li><li>salt</li><li>butter, softened</li><li>sugar</li><li>eggs, separated</li><li>buttermilk</li><li>vanilla extract</li><li>evaporated milk</li><li>sugar</li><li>butter</li><li>egg yolks, slightly beaten</li><li>vanilla extract</li><li>shredded coconut (about 2-2/3 cups)</li><li>chopped pecans</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>Grease and flour the bottoms of 3 (9") round cake pans, and line with wax paper.</li><li>Melt the chocolate and water in bowl over simmering water. (I don't have a double boiler!).</li><li>Stir until chocolate is completely melted.</li><li>Sift flour, baking soda and salt; set aside.</li><li>Beat butter and sugar in large bowl with electric mixer on medium speed until light and fluffy.</li><li>Add egg yolks, 1 at a time, beating well after each addition.</li><li>Stir in chocolate and vanilla.</li><li>Add flour mixture alternately with buttermilk, beating well after each addition.</li><li>Beat egg whites with electric mixer on high speed until stiff peaks form.</li><li>Fold into your batter.</li><li>Pour evenly into prepared pans.</li><li>Bake at 350°F for 30 minutes (or until toothpick inserted in centers comes out clean).</li><li>Immediately run spatula between cakes and sides of pans.</li><li>Cool 15 minutes; remove from pans.</li><li>Remove wax paper and cool completely on wire racks.</li><li>For the frosting:.</li><li>Place milk, sugar, butter, egg yolks and vanilla in large saucepan.</li><li>Stirring constantly, cook on medium heat 12 minutes or until thickened and golden brown.</li><li>Remove from heat.</li><li>Stir in coconut and pecans.</li><li>Cool to room temperature and of spreading consistency.</li><li>Spread the coconut-pecan between each of the layers, and then over top and sides of whole cake.</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

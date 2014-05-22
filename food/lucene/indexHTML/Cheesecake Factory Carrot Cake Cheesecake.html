@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Cheesecake Factory Carrot Cake Cheesecake </h3><span>Cheesecake,Christmas,Novelty,Time to make</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://img.food.com/img/recipes/11/45/75/large/pice7vUzj.jpg" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>cream cheese (at room temp)</li><li>granulated sugar</li><li>flour</li><li>eggs</li><li>vanilla</li><li>vegetable oil</li><li>granulated sugar</li><li>eggs</li><li>vanilla</li><li>flour</li><li>baking soda</li><li>cinnamon</li><li>salt</li><li>crushed pineapple, well drained with juice reserved</li><li>grated carrot</li><li>flaked coconut</li><li>chopped walnuts</li><li>cream cheese, softened</li><li>butter, softened</li><li>powdered sugar</li><li>vanilla</li><li>reserved pineapple juice</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>To make cheesecake,</li><li>In large bowl of electric mixer, beat together 2 pkgs cream cheese and 3/4 cup sugar until smooth.</li><li>Beat in 1 tablespoon flour, 3 eggs and 2 teaspoons vanilla until smooth. Set aside.</li><li>Meanwhile prepare Carrot Cake: In large bowl, combine oil, 1 cup sugar, 2 eggs and 1 teaspoon vanilla, blending thoroughly.</li><li>Stir in 1 cup flour, baking soda, cinnamon and dash salt, mixing well.</li><li>Stir in drained pineapple, carrots, coconut and walnuts.</li><li>Spread 1 1/2 cups carrot cake batter over bottom of greased 9-or 9 1/2-inch springform pan.</li><li>Drop large spoonfuls of cream cheese batter over carrot cake batter; top with large spoonfuls of remaining carrot cake batter.</li><li>Repeat with remaining cream cheese batter, spreading evenly with a knife.</li><li>Do not marble with a knife.</li><li>Bake in preheated 350 degree oven 50 to 65 minutes or until cake is set and cooked through.</li><li>Cool to room temperature, then refrigerate.</li><li>When cake is cold, prepare Pineapple Cream Cheese Frosting.</li><li>In a bowl of electric mixer, combine 2 oz cream cheese, butter, powdered sugar, 1/2 teaspoon vanilla, 1 tablespoon reserved pineapple juice and dash of salt.</li><li>Beat until smooth and of spreading consistency.</li><li>Frost top of cheesecake.</li><li>Refrigerate 3 to 4 hours before serving.</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

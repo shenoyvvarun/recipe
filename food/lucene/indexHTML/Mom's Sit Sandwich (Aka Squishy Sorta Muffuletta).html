@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Mom's Sit Sandwich (Aka Squishy Sorta Muffuletta) </h3><span>Lunch/snacks,Poultry,Cheese,Eggs/dairy,Vegetable,Meat,Kid Friendly,Low in...,Potluck,Weeknight,Taste/mood,To go...,Beginner cook,Time to make,Easy,Presentation</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://img.food.com/img/recipes/27/93/1/large/picYcCbXu.jpg" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>round loaf French bread (or oval "peasant" loaf, or sourdough)</li><li>marinated artichoke hearts, drained, liquid reserved (you can use the hearts whole or roughly chopped)</li><li>mayonnaise</li><li>ripe tomatoes, sliced</li><li>thinly sliced salami</li><li>thinly sliced unsmoked turkey breast</li><li>cheese slice, any kind (provolone and fresh mozzarella are my faves)</li><li>sliced ripe black olives, drained</li><li>purple onion, thinly sliced (amount to taste)</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>Cut loaf of bread in half horizontally and hollow out the soft bread from both halves, leaving a shell about 3/4-inch thick.</li><li>Reserve soft bread for another use.</li><li>In small bowl, combine artichoke liquid with mayonnaise and spread onto bread shells.</li><li>In bottom half, layer ingredients at least three times until mounded high, beginning and ending with tomatoes.</li><li>Place top half of bread over mound of ingredients.</li><li>Wrap entire loaf tightly with plastic wrap.</li><li>This must be assembled at least 2 hours before serving, but can be assembled up to 8 hours before serving.</li><li>Refrigerate.</li><li>Before serving, place sandwich (wrapped in plastic) on a hard surface and SIT ON IT!  This smashes the ingredients together and makes it easier to serve.  Do not omit this step, strange as it seems, as this step is what makes the sandwich delicious.</li><li>Slice the loaf into wedges or slices to serve.</li><li>Note:  I usually roughly chop the artichoke hearts, myself.  Also, regarding the artichoke juice mixture:  you can add only half of it to the mayo, if you like - how much of the spread you're going to need depends on the size of loaf you've gotten.</li><li>Note #2:  other good additions I've made to the sandwich include strips of roasted red and yellow pepper, whole fresh basil leaves (placed on top of the tomatoes) or pesto into the mayo, pepperoncini and/or sliced sweet red cherry peppers, pancetta, and more salami or other hard sausage than the recipe calls for.</li><li>Note #3:  any leftover mayo mixture, by the way, makes a great salad dressing!  I once accidentally used the juice from a jar larger than the recipe called for and the mixture was far more than I needed --  so to thicken it up a bit I added a bit of lowfat sour cream, and made the leftover mixture (much to my husband's delight) available as salad dressing.  Yum!</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

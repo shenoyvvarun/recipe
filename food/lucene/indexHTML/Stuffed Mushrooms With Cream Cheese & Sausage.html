@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Stuffed Mushrooms With Cream Cheese & Sausage </h3><span>Lunch/snacks,Pork,Cheese,Mushroom,Eggs/dairy,Vegetable,Meat,Kid Friendly,Low in...,Potluck,Romantic,Weeknight,Taste/mood,To go...,5 ingredients or less,Oven,Time to make,Easy,Equipment,Presentation</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://pictures.food.com/api/file/SjwyreWT1OzYvXPdCREb-116-stuffed-mushrooms-corr.jpg/convert?loc=/pictures.food.com/recipes/43/39/6/OGPDGfaoTYGTz93v6qx9_116%20stuffed%20mushrooms%20corr.jpg&width=266" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>white button mushrooms, cap size doesn't really matter</li><li>cream cheese</li><li>sausage</li><li>butter (melted, quite optional!)</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>Preheat oven to 350 Fahrenheit.</li><li>Separate caps and stems while cleaning the mushrooms.</li><li>If cleaning with water, let them drain for a bit.</li><li>Start cooking the sausage in frying pan, at a medium to medium/high temperature.</li><li>While the sausage is cooking, put the cream cheese into a mixing bowl so it can soften and mince the stem pieces.</li><li>Spice the sausage to taste.  Garlic is a good addition.</li><li>Just before the sausage is done, add the stem pieces and finish cooking.</li><li>Drain off the excess grease and add the sausage/stem mixture into the cream cheese.</li><li>Mix together well using a wooden spoon or your hands.  Be careful, as it will be rather hot.</li><li>Set the caps into a 13x9 pan (or larger) with sides.</li><li>Optional! Melt enough butter to just put a little in the bottom of each cap or just brush some over the top of each after they're filled.  You can put any extra butter in the bottom of the pan.</li><li>Fill the caps with the cream cheese/sausage/stem mix.</li><li>Add a small amount of water to the bottom of the pan, just enough to cover the bottom.</li><li>Bake for 30 to 45 minutes, or until the tops are crusty and the mushrooms have turned dark.</li><li>Scoop them out of the pan with a slotted spoon and arrange them on a plate.</li><li>Serve warm.  They reheat well, so you can make them ahead of time.</li><li>*VARIATION 1: Add dried bread crumbs to the mix to make a larger batch without adding more cream cheese or sausage. Onions are also another popular addition.</li><li>*VARIATION 2: Use one 8oz. box of cream cheese to two 8oz. pkgs of sausage.  It makes for a larger batch that is less rich and tastes just as good.</li><li>*FUN HINTS: The cream cheese mix is also very good on bread or crackers! This comes in handy if you you think there might be someone who doesn't like mushrooms - save some of the mix to the side for them to dip with.</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

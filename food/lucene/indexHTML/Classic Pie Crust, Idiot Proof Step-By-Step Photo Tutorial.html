@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Classic Pie Crust, Idiot Proof Step-By-Step Photo Tutorial </h3><span>Pie,Crusts/pastry dough,Pies and tarts,Time to make,Number of servings</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://img.food.com/img/recipes/26/20/5/large/picIDqAHC.jpg" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>all-purpose flour (320g)</li><li>sugar</li><li>salt</li><li>cold unsalted butter, cut in 1/2 inch pieces (115g)</li><li>cold vegetable shortening, cut in 1/2 inch pieces</li><li>fresh lemon juice</li><li>cold water</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>Preheat oven to 220°C (425°F).</li><li>Put the flour, sugar, and salt in a food processor; pulse briefly to combine.</li><li>Add the butter and shortening; pulse just until coarse crumbs form, about 30 seconds.</li><li>Add the lemon juice and water.</li><li>Pulse just until moist crumbs form.</li><li>Turn the dough onto a work surface and gently shape it into two equal disks about 4 or 5 inches (10-12 cm) in diameter.</li><li>Wrap in plastic and refrigerate at least 1 hour or up to 1 day (can freeze).</li><li>Elaborating on the original recipe I adopted --   Take one of the two disks and roll it out.</li><li>Place into a lightly greased (I use cooking spray) pie dish, I also carefully roll the pastry around the rolling pin and then "unroll" it into the dish, it's less likely to break this way.</li><li>I take an egg and separate the yolk from the white --  and using a pastry brush, I "paint"the pastry base with some of the egg yolk. Don't use it all because you will need some of it to paint the lid of the pie too.</li><li>This will make a seal and help prevent the bottom of the pie from becoming soggy when the wet filling is added. (Please note: in the photo series one of the small dishes contains the egg white --  it's not used in this recipe as we only need the yoke) Then add your pie filling --  mine in the photo demo is meat, yours could be vegetable or fruit etc --.</li><li>Now roll out your second disk of dough and carefully place this on top of your pie.(I dampen the top edge of the base with a very small amount of water to help join the two layers before laying on my pastry "lid") and then I use a fork to push the edges together.</li><li>After trimming the excess pastry from around the edges, I gather up the pastry scraps and roll them out --  cutting some "leaves" to decorate the top.I wet the bottom of these decorations with a tiny amount of water and then place them on top of the pie.</li><li>Then I add a tablespoon of water to the last of the egg yolk and gently "paint" the whole top of the pie. Lastly, use the fork to poke some holes around the pastry to let the steam out. Put into the oven and bake according to the instructions for the recipe you are making.</li><li>In the demonstration photo series I made  Australian Meat Pie(Australian Meat Pie) and there is a precooked filling, so *that* recipe called for the first 15 minutes on 220°C (425°F) and then 180°C (350°F) for 25 minutes or until golden brown --  DO be aware that different fillings require different cooking times and temperatures and adjust accordingly. Et Voila ! and so EASY !</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

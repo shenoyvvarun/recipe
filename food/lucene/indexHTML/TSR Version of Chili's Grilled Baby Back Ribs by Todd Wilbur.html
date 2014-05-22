@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> TSR Version of Chili's Grilled Baby Back Ribs by Todd Wilbur </h3><span>Lunch/snacks,Pork,Meat,North american,High protein,High in...,Low in...,Savory,Weeknight,Novelty,Taste/mood,Oven,Stove top,Served hot,Time to make,Equipment,Presentation,Technique</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://img.food.com/img/recipes/54/23/4/large/pic2Jg6bB.jpg" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>racks of baby-back pork ribs</li><li>water</li><li>white vinegar</li><li>tomato paste</li><li>yellow mustard</li><li>dark brown sugar, packed</li><li>hickory flavoring liquid smoke</li><li>salt</li><li>onion powder</li><li>garlic powder</li><li>paprika</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>Make the barbecue sauce by combining all of the ingredients for the sauce in a medium saucepan over medium heat.</li><li>When it comes to a boil, reduce heat and simmer sauce, stirring often, for 45 to 60 minutes or until sauce is thick.</li><li>When you're ready to make the ribs, preheat the oven to 300 degrees.</li><li>Brush sauce over the entire surface of each rack of ribs.</li><li>Wrap each rack tightly in aluminum foil and arrange the packets on a baking sheet with the seam of the foil facing up.</li><li>Bake for 2 to 2ï¿½ hours or until the meat on the ribs has pulled back from the cut ends of the bones by about ï¿½ inch.</li><li>When the ribs are just about done, preheat your barbecue grill to medium heat.</li><li>Remove the ribs from the foil (careful not to burn yourself- the liquid inside will be hot!) and grill them on the barbecue for 4 to 8 minutes per side or until the surface of the ribs is beginning to char.</li><li>Brush sauce on both sides of the ribs a few minutes before you remove them from the grill.</li><li>Just be sure not to brush on the sauce too soon or it could burn.</li><li>Serve the ribs with extra sauce on the side and lots of napkins.</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

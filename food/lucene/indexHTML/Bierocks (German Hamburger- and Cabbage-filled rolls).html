@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Bierocks (German Hamburger- and Cabbage-filled rolls) </h3><span>Savory pies,Yeast breads,Breads,Meat,Oven,Time to make,Equipment,Number of servings</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://img.food.com/img/recipes/88/30/4/large/picHEpBz2.jpg" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>cabbage, cut fine</li><li>onion, cut fine</li><li>olive oil</li><li>hamburger</li><li>all-purpose flour</li><li>active dry yeast</li><li>milk</li><li>sugar</li><li>butter</li><li>salt</li><li>eggs</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>FILLING: In a large frying pan, cook the cabbage and onion together until the cabbage is completely softened and golden.</li><li>This process can be hastened by adding a half-cup of water (or so) and covering the pan, but eventually cook all the liquid off before proceeding.</li><li>Season with salt, pepper, and cayenne, if desired.</li><li>In a separate pan, brown the hamburger.</li><li>Season with salt, pepper, and cayenne, if desired.</li><li>Mix the cabbage/onion with the hamburger thoroughly.</li><li>You may complete this part of the recipe in advance,refrigerating until needed, or just before you are ready to assemble the rolls.</li><li>DOUGH: In a large mixing bowl combine 2 cups of the flour and the yeast.</li><li>In a saucepan heat milk, sugar, butter and salt just till warm (115-120 degrees F) and butter is almost melted; stir constantly.</li><li>Ad to flour mixture; add eggs.</li><li>Beat at low speed for 1/2 minute, then three minutes at high speed.</li><li>Stir in as much remaining flour as you can mix in with a spoon.</li><li>Turn out onto a floured surface.</li><li>Knead in enough remaining flour to make a moderately stiff dough that is smooth and elastic (6 to 8 minutes total).</li><li>Shape into a ball, and place in a greased bowl; turn once.</li><li>Cover and let rise in a warm place till double (about 1 hour).</li><li>Punch down and cover; let rest 10 minutes.</li><li>ASSEMBLY: Roll out the dough into a large rectangle, and a thickness of about 1/4 inch.</li><li>Cut into squares of 3 inches by 3 or 4 inches by 4.</li><li>By the spoonful, place some filling mixture into the center of each square, apportioning all of the mixture among the squares.</li><li>For each, bring the two opposite corner ends of the dough square up to meet one another, then do the same with remaining ends and pinch them (all 4) together with your fingers.</li><li>You will see that you now have open slits along the diagnals; pinch these together as well, making a seam of each.</li><li>Water on your fingertips will facilitate them staying"glued" together.</li><li>The end product should be a square with a seam running from each corner to the center where all four are joined.</li><li>Set the squares on a baking sheet (if you had trouble keeping the seams closed, you can flip them over so that the seams are against the baking sheet, thereby keeping all the filling in place and making a nicer presentation).</li><li>Let raise 30 minutes.</li><li>Bake in a pre-heated oven at 375 °F for 30 minutes or until golden brown.</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Spanakopita (Greek Spinach Pie) </h3><span>Lunch/snacks,Spinach,Cheese,Egg,Greens,Eggs/dairy,Vegetable,Greek,European,Kid Friendly,Christmas,Heirloom/historical,Brunch,For large groups,Oven,Time to make,Equipment,Number of servings</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://img.food.com/img/recipes/84/77/0/large/picYGbsYa.jpg" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>country-style phyllo pastry (if you can't get that, regular phyllo pastry will do)</li><li>extra virgin olive oil, approximately</li><li>olive oil</li><li>spinach, cleaned, tough stems removed</li><li>spring onions, cleaned, sliced in 1/4 inch lengths</li><li>leek, white and tender part of green, cleaned, sliced in 1/4 inch lengths (if very large, slice leek in half lengthwise before slicing)</li><li>red onion, chopped fine</li><li>fresh dill, minced</li><li>feta cheese, crumbled (this is a matter of personal taste. I like my spanakopita 'sweeter' and therefore use the lesser amo)</li><li>eggs, beaten</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>Heat 4 tablespoons of olive oil in a large saucepan and sauté the onions and leek until translucent, about 2-3 minutes.  Add the spinach and saute until the leaves have wilted and the liquid has cooked off, about 8-10 minutes.</li><li>Remove the pan from the heat and allow to cool somewhat.  When cool enough to handle, finely chop the spinach and place in a large  bowl.</li><li>Preheat the oven to 375°F.</li><li>Lightly oil (always use olive oil!) a 12 inch in diameter, metal baking pan (you can use a larger baking pan - you will just have a thinner pita, but don't use a smaller one), or a 10 x 15 inch rectangular baking pan.</li><li>Add dill and feta cheese to the spinach.  Add salt and pepper to taste (careful with the salt - the feta will add quite a bit of its own).   Pour the eggs over and give a stir to combine well.</li><li>Open up the phyllo pastry and place on a work surface.  If using the country style pastry proceed, if using the thinner phyllo; cover with a damp cloth.  (Continue to cover the pastry sheets with the damp cloth each time you remove one as you prepare the pie.).</li><li>Layer the phyllo in the pan, allowing the edges to hang over the sides of the pan, brushing each phyllo layer generously with olive oil.</li><li>Use up half the phyllo sheets to make the bottom pastry layer, allowing excess pastry to drape over edge of pan.</li><li>Put the spinach mixture in and press the top down gently to smooth filling.  Tuck in the pastry draping over the edges.</li><li>Repeat layering with the remaining phyllo, oiling each sheet generously.</li><li>Using a sharp knife, score the upper layers of pastry into the size pieces you will want to serve once the pie is baked- BE CAREFUL NOT TO CUT THROUGH BOTTOM PASTRY.</li><li>Bake the pie in the middle of the oven for approximately 40-45 minutes until it is golden brown.   For the last 15-20 minutes, I put my baking pan directly on the oven floor to crisp it better.</li><li>Cool till just warm (we never, but never eat this hot! The flavours just wouldn't come through properly).   Cut into serving pieces and serve either just warm or at room temperature.</li><li>Note:  If my spinach filling appears to be too 'wet', I often take 2 of the phyllo sheets and use them as a 'layer' between the spinach filling; these sheets absorb the extra liquid (they must not be brushed with oil).</li><li>It's also worth noting that Greeks love their olive oil!  I have used olive oil with a lighter hand than most Greeks in this recipe - but it may still be too much for you.  Feel free to add the amount you feel most comfortable with, but be aware that flavour may be compromised.</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

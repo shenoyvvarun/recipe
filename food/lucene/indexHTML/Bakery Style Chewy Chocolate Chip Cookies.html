@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Bakery Style Chewy Chocolate Chip Cookies </h3><span>Drop cookies,Christmas,Brown bag,Taste/mood,To go...,Baking,For large groups,Oven,Time to make,Equipment,Number of servings</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://img.food.com/img/recipes/80/47/0/large/pic959DmD.jpg" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>all-purpose flour (280 gms)</li><li>all-purpose flour (20 gms)</li><li>baking powder</li><li>salt</li><li>unsalted butter, melted and cooled until warm (170 gms)</li><li>brown sugar (packed, light or dark, 236 gms)</li><li>granulated sugar</li><li>egg</li><li>egg yolk, from a large egg</li><li>vanilla extract</li><li>chocolate chips (semi-sweet, milk chocolate or any combination, 300 gms)</li><li>walnuts (114 gms, chopped) (optional)</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>A couple of tips from helpful reviewers.</li><li>The dough is meant to be on the dry side so it can be rolled, not dropped.</li><li>If you're not getting a good flavor, try using a higher quality vanilla and/or chocolate chips. (Penzey's Madagascar Vanilla, Ghirardelli chips, fresh/real butter).</li><li>Check your oven temperature, cooking time and temperature is critical.  If the cookies are not chewy they are probably overcooked.</li><li>Bread flour will make the cookies even more chewy, biscuit flour will make them less chewy.</li><li>Do not let your dough get warm, I like to scoop it on to pans and refrigerate before I pop them in the oven.</li><li>Pan color is very important, if they are too dark you may experience some crisp edges, try using some parchment and lowering the cooking temperature a bit.</li><li>Place oven racks in the upper and lower 1/3's of the oven.</li><li>Preheat oven to 325°F.</li><li>Cover 2 large cookie sheets with parchment paper Mix flour, baking powder & salt in a bowl or bag and set aside.</li><li>Mix butter and sugars with with a mixer until blended and smooth, add egg, yolk & vanilla.</li><li>Mix until incorporated.</li><li>Add dry ingredients and mix until just combined.</li><li>Stir in chips and optional nuts.</li><li>Divide into 18 equal balls, a 2" cookie scoop works just about perfectly, about 60 gms each.</li><li>EVENLY space 9 on each cookie sheet.</li><li>Bake for 12-18 minutes, rotating front to back and top to bottom after 8 minutes.</li><li>Cool on sheets to maintain chewy texture.</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

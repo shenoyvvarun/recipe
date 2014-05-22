@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Make-Ahead Twice-Baked Potatoes </h3><span>Potato,Eggs/dairy,Vegetable,Kid Friendly,Christmas,Weeknight,Oven,Freezer,Served hot,Time to make,Inexpensive,Equipment,Number of servings,Presentation</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://img.food.com/img/recipes/57/06/2/large/pic1PW7m8.jpg" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>large baking potatoes</li><li>butter, melted</li><li>ground black pepper</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>Preheat oven to 350°F.</li><li>Wash potatoes and pat dry.</li><li>Place potatoes, not touching, on a large baking sheet.</li><li>You may need two baking sheets.</li><li>Spray potatoes generously with non-stick cooking spray.</li><li>Sprinkle outside of potatoes with a little salt.</li><li>Bake 1 to 1-1/2 hours or until potatoes "give" when gently squeezed, indicating they are done.</li><li>In large mixing bowl, add butter, cream cheese, salt and pepper and mix well.</li><li>With a serrated knife, cut baked potatoes in half lengthwise, being careful to leave skins unbroken.</li><li>With large spoon, scoop out the inside of potatoes, leaving a thin layer of potato attached to the inside of the skin.</li><li>Place potato skin shells, skin side down, on the baking sheet used to bake the potatoes.</li><li>Put scooped out potato in mixing bowl as you remove it and mix to combine with butter mixture, adding skim milk as needed to make potatoes the consistency of slightly stiff mashed potatoes.</li><li>You may need a little more or less milk to get the final desired consistency.</li><li>Using the palm of your hand to support the potato shell while filling, spoon and press potato mixture into each half potato shell.</li><li>Return filled shell to baking sheet.</li><li>Sprinkle with shredded cheese and pat cheese to make it adhere to the potatoes.</li><li>TO SERVE IMMEDIATELY: Return baking pan of potatoes to oven and bake about 15-25 minutes until potatoes are hot and cheese is melted.</li><li>TO FREEZE FOR LATER USE: Cover potatoes with plastic wrap and place baking sheet in freezer, leaving several hours until potatoes are completely frozen.</li><li>Remove potatoes from freezer and wrap each potato in a resealable plastic sandwich bag.</li><li>Place wrapped potatoes into one or more gallon resealable freezer bags.</li><li>Store in freezer for up to 3 months.</li><li>TO COOK FROZEN POTATOES: Preheat oven to 350°F.</li><li>Place potatoes on baking sheet and loosely cover with aluminum foil.</li><li>Bake about 45 minutes.</li><li>Uncover and bake an additional 15 minutes or more until potatoes are hot.</li><li>Do not over bake.</li><li>This method keeps the potato skins firm and crisp.</li><li>If time is short, place potatoes in microwave and cook on high about 10 minutes.</li><li>Remove and then place in 350°F oven to finish cooking.</li><li>IN A BIG HURRY: These potatoes can be completely heated from frozen state in the microwave, heating them just until they are hot.</li><li>Potato skins will be softer than if cooked in the oven.</li><li>OR, they can be defrosted in the microwave and reheated, uncovered, in a 350°F oven for 15-20 minutes or until hot.</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

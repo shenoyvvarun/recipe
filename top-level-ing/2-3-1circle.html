@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+	<style>
+	circle {
+	  fill: rgb(31, 119, 180);
+	  fill-opacity: .25;
+	  stroke: rgb(31, 119, 180);
+	  stroke-width: 1px;
+	}
+
+	.leaf circle {
+	  fill: #ff7f0e;
+	  fill-opacity: 1;
+	}
+
+	text {
+	  font: 10px sans-serif;
+	}
+	</style>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <h4 style="text-align:center;text-decoration:underline"> Non Baked Items split using n=3 </h4>
+    </div>
+    <!-- /.container -->
+	
+
+    <!-- Load JS here for greater good =============================-->
+	<script src="http://d3js.org/d3.v3.min.js"></script>
+	<script>
+
+	var diameter = 960,
+		format = d3.format(",d");
+
+	var pack = d3.layout.pack()
+		.size([diameter - 4, diameter - 4])
+		.value(function(d) { return d.size; });
+
+	var svg = d3.select("body").append("svg")
+		.attr("width", diameter)
+		.attr("height", diameter)
+	  .append("g")
+		.attr("transform", "translate(2,2)");
+
+	d3.json("2.3-1flare.json", function(error, root) {
+	  var node = svg.datum(root).selectAll(".node")
+		  .data(pack.nodes)
+		.enter().append("g")
+		  .attr("class", function(d) { return d.children ? "node" : "leaf node"; })
+		  .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+
+	  node.append("title")
+		  .text(function(d) { return d.name + (d.children ? "" : ": " + format(d.size)); });
+
+	  node.append("circle")
+		  .attr("r", function(d) { return d.r; });
+
+	  node.filter(function(d) { return !d.children; }).append("text")
+		  .attr("dy", ".3em")
+		  .style("text-anchor", "middle")
+		  .text(function(d) { return d.name.substring(0, d.r / 3); });
+	});
+
+	d3.select(self.frameElement).style("height", diameter + "px");
+
+	</script>  
+
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+  </body>
+</html>

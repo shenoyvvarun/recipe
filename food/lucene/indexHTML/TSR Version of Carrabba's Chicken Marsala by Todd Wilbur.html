@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> TSR Version of Carrabba's Chicken Marsala by Todd Wilbur </h3><span>Chicken breast,Poultry,Meat,European,Time to make,Easy</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://img.food.com/img/recipes/22/08/70/large/picXmZxYR.jpg" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>butter</li><li>prosciutto, diced</li><li>minced shallots</li><li>minced garlic</li><li>fresh mushrooms</li><li>lombardo dry marsala wine</li><li>chicken stock</li><li>cornstarch</li><li>minced fresh parsley</li><li>heavy cream</li><li>salt</li><li>ground black pepper</li><li>dried oregano</li><li>dried thyme</li><li>dried parsley</li><li>marjoram</li><li>garlic powder</li><li>chicken breasts</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>Melt butter over low heat in a medium saucepan.  Turn heat up to medium high to sauté the prosciutto in the melted butter for about 2 to 3 minutes; be careful not to burn butter, add shallots and mushrooms and sauté for about until vegetables are tender then add the garlic and saute another 30 seconds.  Add marsala wine, simmer for another 30 seconds or so, then add black pepper.  Simmer over medium high heat for 5 minutes.</li><li>Dissolve corn starch in chicken stock.  Add stock to saucepan and simmer for an additional 5 minutes.  Add parsley and cream to the sauce and simmer 3 to 4 minutes or until thick.  Remove from heat, cover until needed.</li><li>Preheat barbecue grill on high heat.  Combine ingredients for the chicken spice in a small bowl.  Use your thumb and fingers to crush the spices in the bowl to make a finer blend.</li><li>Brush each chicken breast generously with olive oil.  Sprinkle spice blend over both sides of chicken breast and grill for 6 to 8 minutes per side or until done.  Give chicken a one quarter turn on each side while cooking to make the criss cross grill marks.</li><li>Serve entree by arranging each chicken breast on a plate.  Spoon one quarter of the marsala sauce over each serving of chicken and serve.  Serves 4.</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

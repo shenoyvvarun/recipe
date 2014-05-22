@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Gingerbread Cookies </h3><span>Rolled cookies,Weeknight,Oven,Time to make,Equipment,Number of servings</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://img.food.com/img/recipes/74/60/8/large/picGmujhz.jpg" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>unbleached all-purpose flour</li><li>ground ginger</li><li>ground cinnamon</li><li>salt</li><li>grated nutmeg</li><li>clove</li><li>baking soda</li><li>unsalted butter</li><li>eggs</li><li>unsulphured molasses</li><li>confectioners' sugar</li><li>egg whites</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>For the dough, sift the dry ingredients (except sugar) into a mixing bowl and stir or whisk well to combine.</li><li>Beat the butter and sugar by machine and beat in the eggs, one at a time.</li><li>Continue beating until the mixture is smooth, scraping down often.</li><li>Beat in half the flour mixture, then stop and scrape down the bowl and beaters.</li><li>Beat in the molasses, scrape again, and beat in the remaining flour mixture, just until combined.</li><li>Divide the dough into several pieces and press each piece into a rectangle slightly more than 1/4" thick between 2 sheets of plastic wrap (this step is important).</li><li>Chill the dough for at least 1 hour or until firm.</li><li>Can be left overnight or frozen at this point.</li><li>Set racks in the middle and upper thirds of the oven.</li><li>Preheat the oven to 350°F.</li><li>Roll the dough, one piece at a time, on a floured surface just to make the dough flat and even but not much thinner.</li><li>The cookies should be 1/4 inch thick.</li><li>Cut with floured cutters and arrange on the pans at an inch or two apart, to make room for expansion during baking.</li><li>Repeat with remaining dough.</li><li>Re-roll the scraps immediately or press together, chill and re-roll later.</li><li>Bake the cookies for 8-10 minutes, until firm when pressed with a fingertip.</li><li>(They won't have much extra color and should dent slightly when touched).</li><li>Cool the cookies on pans a minute or two, then transfer to racks.</li><li>Meanwhile, for the icing, combine the confectioner's sugar and egg whites in a mixing bowl and beat by machine until combined.</li><li>Add the lemon juice or vinegar and continue beating till fluffy.</li><li>Divide the icing into several small bowls and add the coloring.</li><li>Keep plastic wrap pressed directly on the surface of the icing to prevent a crust from being formed.</li><li>Use a pastry bag or spread icing on cookies to decorate.</li><li>Use raisins, currants and other decorative sweet bits for extra garnish.</li><li>If you'd like to use the cookies to hang on a Christmas tree, make a small hole near the top of the cookie as soon as they come out of the oven so you can get a narrow ribbon or string through.</li><li>Variation: Cut round cookies and sandwich them with some heated apricot jam.</li><li>The variations are endless.</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

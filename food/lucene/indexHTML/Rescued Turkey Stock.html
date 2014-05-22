@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Rescued Turkey Stock </h3><span>Stocks,Lunch/snacks,Poultry,Vegetable,Meat,Canadian,North american,Kid Friendly,Kosher,Free of...,Christmas,Weeknight,Heirloom/historical,Taste/mood,Stove top,Time to make,Easy,Inexpensive,Equipment,Number of servings</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://img.food.com/img/recipes/24/57/6/large/picqU5BSl.jpg" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>turkey carcass (see first two lines of directions)</li><li>cold water</li><li>celery ribs, sliced</li><li>carrots, scraped and sliced</li><li>onions, quartered (do NOT peel)</li><li>fresh flat leaf parsley (or more, if you wish)</li><li>peppercorn</li><li>dried thyme</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>First, you need a turkey carcass, stripped of all its meat; if you're lucky, you'll be at someone's home and they'll be throwing it away-- that's the time to shout, I'll take it!</li><li>You will also likely discover that you'll be able to rescue a lot of meat off the carcass; this is a bonus, since you now have the meat for the soup as well.</li><li>Try to make the stock the day after the turkey was cooked, but if you have to wait another day or so, that's okay; it'll taste best, though, if you can get to it soon.</li><li>Let's get started; first, get out a large pot.</li><li>Next, start to strip off any meat clinging to the carcass; put this in a container and set aside; note that this is a hands-on job and you will get a little messy; that's okay, both your hands and your counter wash up easily.</li><li>As you are stripping off the meat (don't fret, you won't get it ALL, some stubbornly clings to the bones and that's okay, it too flavours the stock), continue to break up the bones and put them in the pot; also put in the pot any turkey skin and all the other assorted"bits" that aren't edible meat.</li><li>When you have the pot full of bones, pour the cold water over and turn heat to high; bring to a boil.</li><li>Now wash up and prepare the veggies and parsley; make sure to leave the onion skin ON as it gives your stock a lovely rich colour.</li><li>When the stock comes to a boil, add all remaining ingredients and turn heat down to a lightly bubbling simmer, the type where the bubbles barely break the surface.</li><li>Now let it simmer for 3 to 4 hours, stirring every once in a while.</li><li>I much prefer letting it reduce down to where I'll only get 7 or 8 cups of stock; I find the flavour much better and stronger, even if I have to add water when making the soup.</li><li>If you only let it simmer till you have about 12 cups of stock, it will be ready sooner but the flavour is much weaker.</li><li>Once you feel your stock is ready, strain it through a fine-meshed sieve into a large bowl; if your sieve is not fine, line it first with cheesecloth; discard the bones and veggies you used to make the stock, all their goodness is now in your stock.</li><li>Refrigerate stock, covered, for several hours or preferably overnight; then you can either make soup the next day, or freeze the stock; make sure you skim off the solidified fat before you either make soup or freeze the stock.</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Kittencal's Perfect Prime Rib Roast Beef </h3><span>Roast beef,Meat,Very low carbs,High protein,High in...,Low in...,Christmas,Roast,> 1 day,Oven,Time to make,Easy,Equipment,Number of servings</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://img.food.com/img/recipes/82/02/3/large/picS1f9Er.jpg" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>center-cut prime rib roast, nicely marbled, and trimmed, but leave a layer of fat on top of roast for flavor</li><li>fresh large garlic cloves, sliced in half (or use many as desired)</li><li>dry white wine</li><li>beef stock (or use a good quality beef broth)</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>Using a knife, poke small holes all over uncooked roast, and insert a half of a clove of fresh garlic in the hole (as many holes and as much garlic as desired).</li><li>Cover roast, and refrigerate overnight.</li><li>The next day, remove the roast from fridge and uncover; let sit out at room temperature for about 2 to 2-1/2 hours (this is an important step to relax the meat fibers, it will make for a more tender juicy roast, the length of counter-time will depend on the size of your roast).</li><li>Set oven to 450°F and allow the oven to preheat for a minimum of 15 minutes.</li><li>Season the roast with only a small amount of salt but lots of fresh ground black pepper pepper (that's all nothing else but a little salt and fresh ground black pepper, using any other spices will take away the flavor from the prime rib!).</li><li>Place the roast fat-side up on a rack in a shallow-sided pan, then insert a meat thermometer in the middle of the roast but not touching any rib bones.</li><li>Roast uncovered at 450°F for 20 minutes (a few more minutes won't hurt at 450°F).</li><li>After 20 minutes of high heat cooking reduce heat to 350°F and continue to roast for 1 hour to 1 hour and 15 minutes OR until the meat thermometer reads 130°F for rare doneness OR 140°F for medium-rare doneness, that is the way a prime rib really should be served, check your roast after 1 hour cooking time.</li><li>*NOTE* It is strongly advised to remove the roast slightly before desired degree of doneness is achieved as the roast will continue to rise in temperature several degrees after removing from the oven.</li><li>Remove meat to a carving board.</li><li>Cover loosely with foil and allow let rest (DO NOT CUT INTO ROAST for at least 20 or more minutes or all juices in the meat will flow out).</li><li>While the roast is resting prepare the au jus; place the roasting pan on top of the stove over high heat.</li><li>Add in the wine; cook for 8-10 minutes, stirring and scraping any brown bits.</li><li>Add in the beef stock; cook and reduce the juice by half (this might take about 20 minutes).</li><li>Add salt and pepper to taste.</li><li>Slice roast (just before serving!) and drizzle with some of the juice.</li><li>*NOTE* if desired you can cover the roast loosely with foil the first hour and then uncover and cook for the remaining time.</li><li>--------------------------------------------.</li><li>APPROXIMATE COOKING TIMES for the prime rib cooked at 350°F after the 20 minute cooking time at 450°F.</li><li>Rare; cook 12-13 minutes per pound or to 130°F.</li><li>Medium-rare; cook 14-16 minutes per pound or to 140°F (I would not recommend cooking a prime rib any more than medium-rare).</li><li>Since every oven cooks differently cooking times are only approximate.</li><li>SUGGESTED SERVING PORTIONS PER PERSON ----for a generous serving of prime rib roast you should figure on 2 people per rib, that means if you plan to serve 6 people you should be able to do so with 3 ribs/ eight people with 4 ribs/ do not bother with less than 3 ribs anything less than that is not a roast but rather a steak and would be better treated as such.</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

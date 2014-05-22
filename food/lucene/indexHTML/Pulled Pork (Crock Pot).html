@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Pulled Pork (Crock Pot) </h3><span>Pork,Meat,North american,Low sat. fat,Healthy,Low in...,5 ingredients or less,Beginner cook,Time to make,Easy,Equipment,Number of servings</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://pictures.food.com/api/file/ZQJQBHP0QTSKpUuWOcZh-017-pulled-pork.jpg/convert?loc=/pictures.food.com/recipes/13/10/18/DBYytHITc6QMhK6GtTzm_017%20pulled%20pork.jpg&width=266" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>pork roast (shoulder or butt)</li><li>onions</li><li>ginger ale</li><li>favorite barbecue sauce (I like Sweet Baby Ray's)</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>Slice one onion and place in crock pot.</li><li>Put in the roast and cover with the other onion, sliced. Pour over the ginger ale. Cover and cook on LOW for about 12 hours. See Note2 below regarding amount of time needed!</li><li>Remove the meat, strain and save the onions, discard all liquid. With two forks, shred the meat, discarding any remaining fat, bones or skin. Most of the fat will have melted away.</li><li>Return the shredded meat and the onions to the crock pot, stir in the barbecue sauce. Continue to cook for another 4 to 6 hours on LOW.</li><li>Serve with hamburger buns or rolls and additional barbecue sauce. Any leftovers freeze very well.</li><li>TIP: freeze ready-made sandwiches - a scoop of meat on a bun, well-wrapped. These make a great quick meal or snack. To reheat, remove wrapping, wrap in a paper towel, and zap 1-2 minute in the microwave.</li><li>Note: Shoulder or butt are recommended because the meat shreds very well. Other cuts do not shred as readily. It is a fattier cut, but the fat melts away in the cooking and is poured away when you discard the liquid.</li><li>Note 2: I have an older, smaller crock pot. The above times work perfectly for me. But if you have a newer or bigger crock pot, you may need to revise times downward, esp. after the bbq sauce is added. I think you need at least a couple of hours for it all to meld, but that may be all you need. Update: I recently bought a bigger crockpot, I think 5 or 6 qts. I cooked a 6 lb pork shoulder in it for 8 hours and it was shreddable at that point. Shredded, added the sauce, and cooked for another hour or so to meld everything. So use your best judgment on timing!</li><li>Note3: You might want to turn your roast over after it's cooked a while, to ensure more even cooking. I think this may depend on the size and shape of your roast and the size of your slow cooker. Remember that each time you remove the lid you lose heat and be careful, as turning a large piece of meat is awkward.</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Lasagna Supremo (The Best Lasagna Ever!) </h3><span>Pork,Cheese,Mushroom,Eggs/dairy,Vegetable,Meat,Pasta, rice and grains,European,Oven,Time to make,Equipment</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://img.food.com/img/recipes/86/62/3/large/picDdOs5L.jpg" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>lasagna noodle</li><li>ground beef</li><li>ground pork</li><li>Italian sausage (thinly sliced)</li><li>button mushroom (thinly sliced)</li><li>onion (chopped)</li><li>garlic cloves (minced)</li><li>sugar</li><li>salt</li><li>dried basil</li><li>fennel seed</li><li>ground black pepper</li><li>eggs (lightly beaten)</li><li>ricotta cheese</li><li>dried parsley flakes</li><li>pitted ripe black olives (sliced)</li><li>mozzarella cheese (shredded)</li><li>parmesan cheese (grated)</li><li>hunts chunky crushed tomatoes</li><li>hunts tomato paste</li><li>stewed tomatoes (Italian style)</li><li>extra virgin olive oil</li><li>garlic cloves (cut in halves)</li><li>chopped garlic, in juice (from jar)</li><li>shallot (diced)</li><li>dried oregano</li><li>dried Italian seasoning</li><li>dried basil</li><li>granulated sugar</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>FOR THE LASAGNA: Prepare lasagna according to package directions.</li><li>Drain and set aside.  NOTE: You can use Barella No Boil Noodles, but be sure during the assembly of the layers that the noodles do not stick out.</li><li>Cook Italian sausage either in a skillet or by boiling in a pot of water, thinly slice crosswise and set aside.</li><li>Brown the ground beef and ground pork in a skillet, drain off and discard fat.</li><li>Add onion and garlic to the ground meat, stir and cook another 5 minutes.</li><li>Add the sugar, salt, basil, fennel seeds, pepper and the Marinara sauce and simmer for 20 minutes.</li><li>While the above mixture is simmering, combine in a large bowl the eggs, Ricotta cheese, and parsley.</li><li>Preheat oven to 375 degrees.</li><li>Take a 13 by 9 inch baking dish and spray the bottom with a non-stick spray, such as Pam.</li><li>In the baking dish, spoon in a layer of 1/3 of the meat sauce.</li><li>Then layer 1/3 of the lasagna pasta (overlapping each strip of pasta with the other).</li><li>Then layer 1/3 of the Ricotta mixture.</li><li>Then layer 1/3 of the sliced olives and 1/3 of the sliced Italian sausage.</li><li>Then layer 1/3 of the sliced mushrooms.</li><li>Then layer 1/3 of the Mozzarella and 1/3 of the Parmesan.</li><li>Then continue to repeat the layering until all of the ingredients are layered.</li><li>When the layering is completed, cover with aluminum foil, making certain that the foil is not touching the top of the lasagna, and bake for 25 minutes.</li><li>Remove foil and bake, uncovered, another 25 minutes.</li><li>Remove from oven and allow to sit and rest 10 minutes before cutting.</li><li>FOR THE MARINARA SAUCE (by Alan Leonetti): Empty Hunts chunky crushed tomatoes and Hunts tomato paste into the pot.</li><li>Add the extra-virgin olive oil to the pot.</li><li>Slice the cloves of garlic crosswise into either halves or thirds or pieces, and dump them into the pot.</li><li>Dice the shallot, and dump that into the pot.</li><li>Add the rest of the ingredients, and stir to mix well with a large long handled wooden spoon.</li><li>Do not strain, as the pulp adds to make this a thick and wonderful sauce.</li><li>Cover and cook on medium heat, stirring every 10 minutes for about an hour or until it bubbles and is completely heated throughout.</li><li>Reduce heat to simmer, and continue to simmer, stirring every 10 or 15 minutes to keep from burning or sticking to the bottom of the pot for 1 or 2 hours.</li><li>Remove from heat and give it one last stir.</li><li>Serve over spaghetti, ravioli, pasta or use for chicken parmesan, veal parmesan, or anything that calls for a Marinara sauce.</li><li>NOTE: Use only Hunts Chunky Crushed Tomatoes and Hunts Tomato Paste.</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

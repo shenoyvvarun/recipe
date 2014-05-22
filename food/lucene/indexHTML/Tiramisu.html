@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Tiramisu </h3><span>Puddings and mousses,Eggs/dairy,European,Romantic,Taste/mood,No Cook,Refrigerator,Served cold,Time to make,Equipment,Presentation,Technique</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://img.food.com/img/recipes/84/61/2/large/picrH1Gb1.jpg" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>strong plunger espresso coffee, cooled to room temp</li><li>Tia Maria (or another liqueur, but the coffee flavour is really enhanced)</li><li>eggs, separated</li><li>caster sugar</li><li>mascarpone cheese</li><li>cream (anything that will hold the peaks heavy whipping cream works fine as will anything 36% milkfat or hi)</li><li>ladyfingers (savoiardi)</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>Put the egg yolks and sugar in a large bowl.</li><li>Beat with electric mixers until the mixture goes pale and thick.</li><li>Add mascarpone and beat until combined.</li><li>It does not matter if it is marbled slightly.</li><li>Whip the cream until stiff peaks hold, and fold gently into the egg mixture.</li><li>I use a spatula, but you could use a metal spoon.</li><li>Do not beat!</li><li>Beat the egg whites to soft peaks in a perfectly clean metal bowl.</li><li>If there is any grease, they won't whip properly.</li><li>Make sure you rinse and dry your beaters well.</li><li>Fold the whites into the cream.</li><li>It is very important to retain as much air as possible.</li><li>For serving you can use a big dish or individual glasses.</li><li>If using a big dish: Put the coffee and liquer in a bowl.</li><li>Dip biscuits in coffee one at a time.</li><li>Drain well.</li><li>Layer in your dish, covering the whole bottom.</li><li>Place half of the mascarpone mix on top and spread out.</li><li>Repeat with remaining biscuits and mascarpone, finishing with a creamy layer.</li><li>Smooth surface.</li><li>Dust with cocoa.</li><li>Refrigerate for at least 2 hours, but it works quite well if you leave for up to 24 hours.</li><li>If using glasses: Break the biscuits up into pieces that will fit your glasses and do the same soaking and layering as before.</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

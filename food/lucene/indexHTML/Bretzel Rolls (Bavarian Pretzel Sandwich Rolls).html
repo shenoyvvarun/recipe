@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Bretzel Rolls (Bavarian Pretzel Sandwich Rolls) </h3><span>Breads,Low protein,Low cholesterol,Low sat. fat,Healthy,Low in...,Time to make</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://img.food.com/img/recipes/16/97/90/large/picOK7KFC.jpg" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>warm water</li><li>warm milk</li><li>active dry yeast</li><li>light brown sugar</li><li>butter, melted</li><li>all-purpose flour</li><li>cold water</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>In a small bowl if using a bread machine, or in the bowl of a standing electric mixer fitted with a dough hook, mix a 1/3 cup of the warm water (105-115 degrees) with the yeast and let stand until foamy.</li><li>Add the remaining cup of warm water along with milk, sugar & melted butter and swirl to dissolve the sugar. (If using a bread machine add mixture to bread machine at this point and continue).</li><li>Add flour and mix on dough cycle or med-low speed.</li><li>Remove dough from bread machine once it forms a nice a firm, pliable dough ball.</li><li>Add more flour if necessary.</li><li>Turn dough out onto a lightly floured table and knead for 2 minutes.</li><li>Roll into a 2 foot long log and cut into 12 even pieces.</li><li>Cover dough with plastic and a damp cloth and let sit for 10 minutes.</li><li>Pat dough into rolls or form knots and arrange on a lightly floured surface about an inch apart and cover with lightly oiled plastic wrap.</li><li>Let the pretzels rest for an additional 30 minutes.</li><li>Preheat the oven to 425°.</li><li>Lightly oil 2 baking sheets.</li><li>In a large stockpot, bring the cold water to a rolling boil and add baking soda.</li><li>Drop two rolls into the boiling water and boil for no more then 30 seconds, turning once.</li><li>Carefully remove with tongs or slotted spoon and hold above pot and let drain.</li><li>Sprinkle lightly with salt.</li><li>Repeat with the remaining rolls.</li><li>Arrange rolls on the oiled baking sheets and bake on the upper and middle racks of the oven for about 8-10 minutes, or until browned all over; shift pans from top to bottom and back to front halfway through, for even baking.</li><li>Let rolls cool on the baking sheets for about 5 minutes, then transfer them to a rack.</li><li>Serve warm or at room temperature.</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Sweet Bacon-Wrapped Venison Tenderloin </h3><span>Deer,Elk,Moose,Pork,Wild game,Meat,Midwestern u.s.,North american,Low cholesterol,Healthy,Low in...,Savory,Sweet,Taste/mood,For 1 or 2,5 ingredients or less,Oven,Time to make,Easy,Inexpensive,Equipment,Number of servings</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://img.food.com/img/recipes/13/96/64/large/picvzOjgf.jpg" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>venison tenderloins (a single deer loin or Moose or Elk or Pork or Beef)</li><li>bacon (Plain, thin-sliced Bacon is best)</li><li>dark brown sugar</li><li>soy sauce (Regular NOT low-sodium. You'll want the saltiness)</li><li>white sugar (Optional for added Sweetness)</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>Mix brown Sugar and Soy sauce together in a bowl. They should combine nicely into a soupy soy liquid.</li><li>Put Deer Loin in a cooking tray and pour Brown Sugar/Soy Sauce mixture over loin. Roll tenderloin over in mixture, completely covering it.</li><li>Let meat marinate in mixture at least 3 hours or overnight in fridge. It's best to marinate for 8 hours if you have the time. Also GREAT to use a Food Saver or other Vacuum device to Vacuum pack/seal the meat with Marinade. With this method, you can achieve Overnight-level marinade in just a couple hours!</li><li>Remove loin from tray, and place on a slotted bake sheet with a drip pan or aluminum foil below to catch dripping. Don't throw away marinade.</li><li>Wrap a piece of bacon around the very end of the  tenderloin, securing the bacon strip with a toothpick.</li><li>Repeat this process until the entire loin is wrapped in ten or so bacon "loops." The tenderloin should look like an arm with a bunch of wrist watches on it, the watches being the bacon strips.</li><li>Drizzle remaining marinade over deer loin. You can continue to baste the loin with the marinade throughout the cooking process with either a brush or a turkey baster.</li><li>Place on center rack in oven and bake at 350°F for 30-40* minutes. *This should cook the meat to about Medium. For those of you who prefer rare meat (like me), cut the time to 25-30 minutes and then follow with the "OPTION 2" step below regarding searing.</li><li>OPTION 1 - with about 10 minutes of cooking time left, you can lightly dust the top of the loin with white sugar. This creates a sweet crust on top of the bacon. Might be too sweet for some. Try doing it on just HALF of the loin to see if you like it!</li><li>OPTION 2 - For a crispier crust and crispier bacon, remove Loin from oven and place the Loin(s) directly on a Grill over medium-high heat to sear the bacon and outer loin. (Thanks to all of you reviewers who taught me this. It's a great step for those of us who like a cooked crust and a pink center).</li><li>Remove from oven and place on cutting board. Using a knife, cut the loin between each strip of bacon so that you have many pieces of meat, each with their own toothpick.</li><li>You can eat these pieces directly from the toothpick or remove the toothpick and eat like steak. You can thank me later.</li><li>The next day, try the leftovers on a wheat bun with spicy BBQ Saucefor an awesome leftover sandwich.</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Uncle Bill's Method for Cooking Turkey </h3><span>Whole turkey,Poultry,Meat,Very low carbs,High protein,High in...,Low in...,Christmas,Thanksgiving,Weeknight,Roast,For large groups,Oven,Time to make,Easy,Equipment,Number of servings</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://img.food.com/img/recipes/46/26/2/large/pic5GuKk1.jpg" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>whole turkey</li><li>extra virgin olive oil, if required (or more)</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>Turkey must be thoroughly thawed before preparing for the oven unless you are using a fresh turkey.</li><li>Remove turkey parts from cavities and use as you desire.</li><li>Wash cavities well with cold water.</li><li>Boil a kettle of hot water (scalding hot.).</li><li>Place turkey in a clean sink or a large roasting pan.</li><li>Pour hot water over the entire turkey including in the cavities.</li><li>The skin will shrink tightly to the turkey.</li><li>"This will help hold the natural juices in the turkey while it is cooking.  Do not peel skin back to layer herbs under the skin.  This will destroy the process for a moist turkey.</li><li>"Pat dry both inside and outside of turkey.</li><li>Preheat oven to 400°F.</li><li>Sprinkle cavities with salt and black pepper and granulated garlic powder.</li><li>If you are stuffing the bird, then line inside of cavity with cheesecloth, then stuff with your favorite dressing,"stuff loosely",.</li><li>Tie legs and wings with a good meat wrapping twine and leave a lifting loop to remove the turkey from the pan when cooked.</li><li>Place a wire rack in the bottom of roasting pan.</li><li>Place the turkey on the wire rack, breast side up.</li><li>Pour 2 cups of water or 2 cups of chicken broth into the pan.</li><li>Pour about 1/2 cup or more if required of extra virgin olive oil over the exterior of the turkey.</li><li>Cover the turkey with heavy aluminum foil, but do not let the foil touch the turkey as it will stick to the turkey while cooking.</li><li>Pinch foil tight to the sides of the pan.</li><li>Place turkey on lower rack in oven and cook for 1 hour.</li><li>Reduce heat to 325 F and cook for 2 1/2 hours.</li><li>Now turn heat up to 350 F and cook for another 1/2 hour.</li><li>Remove foil from turkey.  At this time test for doneness by inserting an instant read thermometer into the breast to see how the cooking temperature is.  We are cooking towards a reading of 175°F.</li><li>Baste,the turkey and continue cooking, uncovered, for an additional 1 hour at 350 F, basting about every 15 minutes so that the turkey turns a nice brown color.</li><li>When the time for cooking is finished, test for doneness.  Insert the instant read thermometer into the thickest portion of the turkey breast, reading should be 175 F and  no more.    .</li><li>Remove from oven, lift turkey out the roasting pan using the string loops.</li><li>Cover with foil and let the turkey rest for about 1/2 hour before carving.</li><li>Total time for cooking a 16 pound stuffed turkey is 5 hours.</li><li>There is no need to baste the turkey until the last 1 hour of cooking, this saves you a lot of time as you do not have to remove the foil tent during the first 4 hours.</li><li>For a crispy browner skin, you may wish to consider rubbing butter over the entire bird after pouring olive oil.  This works very nicely.</li><li>COOKING TIMES: Left Side -Stuffed---- Right Side - Unstuffed.</li><li>*12-14lbs.</li><li>4 - 4 1/2 hours-- 3 1/2 - 3  3/4 hours.</li><li>*14-16lbs.</li><li>4 1/2 - 5 hours-- 3 3/4 - 4 hours.</li><li>*16-18lbs.</li><li>5- 5 1/2 hours-- 3  3/4 - 4 1/4 hours.</li><li>*18-20lbs.</li><li>5 1/2 - 6 hours-- 4 1/4 - 4 1/2 hours.</li><li>*20-22lbs.</li><li>6 - 6 1/4 hours-- 4 1/2 - 5 hours.</li><li>*22-24lbs.</li><li>6 1/4- 6 1/2 hours-- 5 - 5 1/4 hours.</li><li>NOTE:  Test for doneness by inserting a meat thermometer in the thickest part of the breast, reading should be 175 F and in the thickest part of the leg or thigh, reading should be 180°F.</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>

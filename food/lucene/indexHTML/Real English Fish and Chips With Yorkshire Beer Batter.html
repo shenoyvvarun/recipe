@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Foodie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body onload="load()">
+    <div class="container">
+		<nav style="margin-top:20px" class="navbar navbar-inverse navbar-embossed" role="navigation">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse-04">
+					<span class="sr-only">
+						Toggle navigation
+					</span>
+				</button>
+				<a class="navbar-brand" href="index.py">
+					Foodie
+				</a>
+			</div>
+			<div id="navbar-collapse-04" class="collapse navbar-collapse">
+				<form class="navbar-form navbar-left" role="search" action="search.py" method="GET">
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Search" name="q"></input>
+					</div>
+					<button class="btn btn-default" type="submit">
+						Search
+					</button>
+				</form>
+			</div>
+		</nav>
+		<h3 id="title" style="display:inline"> Real English Fish and Chips With Yorkshire Beer Batter </h3><span>One Dish meal,Saltwater fish,European,Low cholesterol,Low sat. fat,Healthy 2,Toddler Friendly,Healthy,Kid Friendly,Low in...,Brown bag,Novelty,Taste/mood,To go...,Deep fried,Time to make,Easy,Inexpensive,Technique</span><br/>
+		<div  style="padding:3px;border: solid #34495E 1px;width:auto;clear:both;overflow:auto;float:left;margin-right:40px" ><img style="" height="200px" src="http://img.food.com/img/recipes/18/33/99/large/pic7fKkRk.jpg" /></div>
+		<h5> Ingredients </h5>
+		<table width="400px"><tr><td> <ul><li>plain flour</li><li>bicarbonate of soda</li><li>british beer, Small</li><li>lemon, juice of</li><li>potatoes, peeled & chipped</li></ul> </td></tr></table>
+		<h5> Method </h5>
+		<div> <ol><li>Heat fat up in a chip pan or automatic deep fat fryer - mine has a chip setting which is 190°C.</li><li>Peel the potatoes and cut into chunky sized chips. Rinse and dry thoroughly.</li><li>Fry chips for about 3 minutes until soft but NOT coloured. Drain and shake well and set to one side.</li><li>Put some flour onto a plate. Dredge the fish fillets in the flour thoroughly - this is VERY important, it stops the batter sliding off when fried! Leave the fish fillets in the flour whilst you make the batter.</li><li>Some people say you should make the batter at least one hour before - I have found little difference - so make it before if it is convenient or now!</li><li>Put flour, bicarbonate of soda, salt and pepper into a large roomy bowl. Add the beer gradually, stop when you have a thick coating type of batter. Drink any beer that is left! Whisk thoroughly until it is smooth and there are no lumps.Add the lemon juice OR a splash of malt vinegar if desired. Mix thoroughly again.</li><li>Have your plates, newspaper or whatever ready for eating!</li><li>Adjust deep fat fryer to fish frying temperature of 160°C.</li><li>Take one fillet of fish at a time and holding it by the tail or thin end (!) swirl it around the batter until well coated - plunge into hot fat immediately. As soon as it has crisped up and set, add your other fillets one at a time, taking out the first ones as they cook - about 6 to 10 minutes depending on the thickness. Place onto a tray and keep warm in the oven.</li><li>Turn up the heat setting to 190°C again and cook your chips until golden and crisp.</li><li>Serve on plates or newspaper with salt & vinegar!</li><li>All you need now is a pint of warm beer and Coronation Street on the TV to set the scene!</li><li>This batter is great for small fish goujons, chicken goujons and also tempura vegetables too.</li><ol> </div>
+		<h5> Reviews </h5>
+		<div>Your Rating:&nbsp;&nbsp; <b id="sliderValue">0</b><p/>
+			<div style="width:200px" id="slider" class="ui-slider" ></div>
+		</div>
+		<button class="btn btn-embossed btn-primary" onclick="submitRating()">
+			Submit Rating
+		</button>
+		<div id="submsg"> </div>
+		<br/><br/><br/><br/><br/>
+	</div>
+    <!-- /.container -->
+
+
+    <!-- Load JS here for greater good =============================-->
+	
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+    <script src="js/bootstrap-switch.js"></script>
+    <script src="js/flatui-checkbox.js"></script>
+    <script src="js/flatui-radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script>
+	function load(){
+		var $slider = $("#slider");
+		if ($slider.length > 0) {
+		  $slider.slider({
+			min: 0,
+			max: 5,
+			value: 0,
+			orientation: "horizontal",
+			range: "min",
+			change: function(e){
+					$('#sliderValue').html($("#slider").slider("option","value"))
+				}
+		  }).addSliderSegments($slider.slider("option").max);
+		}
+	}
+	</script>
+	<script>
+	function submitRating(){
+		var xhr = new XMLHttpRequest();
+		url = "http://localhost/food/rating.py?rating="+document.getElementById("sliderValue").innerHTML+"&recipe="+encodeURIComponent(document.getElementById("title").innerHTML)
+		xhr.open("GET",url,true)
+		xhr.onreadystatechange =  function(){
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("submsg").innerHTML = xhr.responseText
+				//alert(xhr.responseText)
+			}
+		}
+		xhr.send()
+		
+	}
+	</script>
+  </body>
+</html>
